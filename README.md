@@ -5,7 +5,7 @@ SSB-QB4OLAP is inspired on the work by Kampgen et al, [No Size Fits All – Runn
 
 QB4OLAP is a RDF-S vocabulary to represent multidimensional data cubes. It is accompanied with QL,a high-level OLAP language composed by operators like rollup, drilldown, slice, and dice. QB4OLAP includes enough metadata to allow the automatic translation of QL queries into SPARQL queries. The implementation of our query engine is available [here](https://github.com/lorenae/qb4olap-tools)
 
-The main objectives of SSB-QB4OLAP are (i) to demostrate the kind of queries that can be represented using QL, (ii) to show the feasibility of our approach, and (ii) to provide a baseline for evaluating SPARQL queries performance in this particular context, and possible optimizations.
+The main objectives of SSB-QB4OLAP are: (i) to show the kind of queries that can be represented using QL, (ii) to show the feasibility of our approach, and (ii) to provide a baseline for evaluating SPARQL queries performance in this particular context, and possible optimizations.
 
 SSB-QB4OLAP consists of:
 * METADATA: the **schema** of a datacube, written in [QB4OLAP](https://github.com/lorenae/qb4olap), which extends the schema designed by Kampgen et al. 
