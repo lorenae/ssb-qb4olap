@@ -10,7 +10,7 @@ The main objectives of SSB-QB4OLAP are (i) to demostrate the kind of queries tha
 SSB-QB4OLAP consists of:
 * METADATA: the **schema** of a datacube, written in [QB4OLAP](https://github.com/lorenae/qb4olap), which extends the schema designed by Kampgen et al. 
 * DATA: 
-  * a set of **observations** that represent SSB data cube at Scale 1 with 6,000,000 lineorders, taken from SSB-QB and written in QB
+  * a set of **observations** that represent SSB data cube at Scale 1 with 6,000,000 lineorders, taken from (http://people.aifb.kit.edu/bka/ssb-benchmark/#olap4ld-qb)
   * triples that represent **dimension level members and rollup relationships** between them, written in QB4OLAP.
 * QUERIES: 
   * a set of 13 queries written in QL that are equivalent to the queries proposed by Kampgen et al.
