@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<bibm version="Openlink BIBM Test Driver 0.7.7">
+  <querymix>
+     <date>Mon Dec 07 18:28:07 ART 2015</date>
+     <scalefactor>1.0</scalefactor>
+     <exploreEndpoint>http://csi-server01.fing.edu.uy:8890/sparql</exploreEndpoint>
+     <updateEndpoint>http://csi-server01.fing.edu.uy:8890/sparql</updateEndpoint>
+     <usecase>/home2/lorenae/MEGA/PhD/evaluacion/ssb_qb4olap/ES10_NG_IRIS_UNION+OC3/./queries</usecase>
+     <nStreams>2</nStreams>
+     <seed>808080</seed>
+     <power>214.7</power>
+     <throughput>148.0</throughput>
+     <qmph>178.2</qmph>
+     <elapsedruntime>632.6</elapsedruntime>
+  </querymix>
+</bibm>

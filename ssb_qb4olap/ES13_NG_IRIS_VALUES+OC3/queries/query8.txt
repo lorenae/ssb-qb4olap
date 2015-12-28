@@ -1,0 +1,43 @@
+PREFIX qb: <http://purl.org/linked-data/cube#> 
+PREFIX qb4o: <http://purl.org/qb4olap/cubes#> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+SELECT ?plm2 ?plm3 ?plm5  (SUM(<http://www.w3.org/2001/XMLSchema#float>(?m4)) as ?ag1) 
+FROM NAMED <http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap> 
+FROM NAMED <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> 
+WHERE { 
+{GRAPH <http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap> {
+?o a qb:Observation .
+?o qb:dataSet <http://lod2.eu/schemas/rdfh-inst#ds> .
+?o <http://lod2.eu/schemas/rdfh#lo_revenue> ?m4 .
+?o <http://lod2.eu/schemas/rdfh#lo_orderdate> ?lm1 .
+?o <http://lod2.eu/schemas/rdfh#lo_custkey> ?lm2 .
+?o <http://lod2.eu/schemas/rdfh#lo_suppkey> ?lm4
+
+}}.
+{GRAPH <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> {
+
+?plm4 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#nationName> "UNITED STATES" .
+?plm4 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#nation> .
+?plm3 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#inNation> ?plm4 .
+?plm3 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#city> .
+?lm2 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#inCity> ?plm3 .
+?lm2 qb4o:memberOf <http://lod2.eu/schemas/rdfh#lo_custkey> .
+
+?plm6 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#nationName> "UNITED STATES" .
+?plm6 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#nation> .
+?plm5 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#inNation> ?plm6 .
+?plm5 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#city> .
+?lm4 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#inCity> ?plm5 .
+?lm4 qb4o:memberOf <http://lod2.eu/schemas/rdfh#lo_suppkey> .
+
+?plm2 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#yearNum> ?plm21 .
+?plm2 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#year> .
+?plm1 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#monthInYear> ?plm2 .
+?plm1 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#month> .
+?lm1 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#dateInMonth> ?plm1 .
+?lm1 qb4o:memberOf <http://lod2.eu/schemas/rdfh#lo_orderdate> .
+
+ FILTER ((?plm21 >= 1992)&&(?plm21 <= 1997))
+ }}
+ }
+GROUP BY ?plm2 ?plm3 ?plm5

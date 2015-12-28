@@ -1,0 +1,69 @@
+PREFIX qb: <http://purl.org/linked-data/cube#> 
+PREFIX qb4o: <http://purl.org/qb4olap/cubes#> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+
+SELECT ?plm2 ?plm7 ?plm10  
+(SUM(<http://www.w3.org/2001/XMLSchema#float>(?m4)-<http://www.w3.org/2001/XMLSchema#float>(?m5)) as ?ag1)
+
+FROM NAMED <http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap> 
+FROM NAMED <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> 
+WHERE { 
+{GRAPH <http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap> {
+ ?o a qb:Observation .
+?o qb:dataSet <http://lod2.eu/schemas/rdfh-inst#ds> .
+?o <http://lod2.eu/schemas/rdfh#lo_revenue> ?m4 .
+?o <http://lod2.eu/schemas/rdfh#lo_supplycost> ?m5 .
+?o <http://lod2.eu/schemas/rdfh#lo_orderdate> ?lm1 .
+?o <http://lod2.eu/schemas/rdfh#lo_custkey> ?lm2 .
+?o <http://lod2.eu/schemas/rdfh#lo_partkey> ?lm3 .
+?o <http://lod2.eu/schemas/rdfh#lo_suppkey> ?lm4 .
+}}.
+{GRAPH <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> {
+
+
+?plm5 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#regionName> "AMERICA" .
+?plm5 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#region> .
+?plm4 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#inRegion> ?plm5 .
+?plm4 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#nation> .
+?plm3 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#inNation> ?plm4 .
+?plm3 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#city> .
+?lm2 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#inCity> ?plm3 .
+?lm2 qb4o:memberOf <http://lod2.eu/schemas/rdfh#lo_custkey> .
+
+?plm11 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#regionName> "AMERICA" .
+?plm11 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#region> .
+?plm10 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#inRegion> ?plm11 .
+?plm10 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#nation> .
+?plm9 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#inNation> ?plm10 .
+?plm9 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#city> .
+?lm4 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#inCity> ?plm9 .
+?lm4 qb4o:memberOf <http://lod2.eu/schemas/rdfh#lo_suppkey> .
+
+
+?plm2 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#yearNum> ?plm21 .
+?plm2 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#year> .
+?plm1 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#monthInYear> ?plm2 .
+?plm1 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#month> .
+?lm1 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#dateInMonth> ?plm1 .
+?lm1 qb4o:memberOf <http://lod2.eu/schemas/rdfh#lo_orderdate> .
+
+?plm8 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#manufacturerName> ?plm81 .
+?plm8 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#manufacturer> .
+?plm7 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#hasManufacturer> ?plm8 .
+?plm7 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#category> .
+?plm6 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#hasCategory> ?plm7 .
+?plm6 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#brand> .
+?lm3 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#hasBrand> ?plm6 .
+?lm3 qb4o:memberOf <http://lod2.eu/schemas/rdfh#lo_partkey> .
+{
+{?plm8 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#manufacturerName> "MFGR#1" }
+UNION
+{?plm8 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#manufacturerName> "MFGR#2" }	
+}
+
+FILTER ((?plm21 >= 1997)&&(?plm21 <= 1998))
+}
+ }}
+GROUP BY ?plm2 ?plm7 ?plm10 
+                                
+                                

@@ -1,0 +1,46 @@
+
+Version:                Openlink BIBM Test Driver 0.7.7
+Start date:             Fri Nov 20 13:25:13 ART 2015
+Scale factor:           1.0
+Explore Endpoint:       http://csi-server01.fing.edu.uy:8890/sparql
+Update Endpoint:        http://csi-server01.fing.edu.uy:8890/sparql
+Use case:               /home2/lorenae/MEGA/PhD/evaluacion/ssb_qb4olap/B2_NG_IRIS/./queries
+Query Streams of Throughput Test:2
+Seed:                   808080
+TPC-H Power:            402.4 qph*scale (geom)
+TPC-H Throughput:       361.2 qph*scale
+TPC-H Composite:        381.2
+Measurment Interval:    259.1 seconds
+
+Duration of stream execution:
+                Query Start         Query End       Duration     RF1 Start           RF2 End           RF2 Start          RF2 End  
+Stream 0:	20/11/2015 01:25:13	20/11/2015 01:28:12	00:02:58	
+Stream 1:	20/11/2015 01:28:12	20/11/2015 01:32:26	00:04:13	
+Stream 2:	20/11/2015 01:28:12	20/11/2015 01:32:31	00:04:19	
+
+TPC Timing intervals (in seconds):
+
+Query		Q1	Q2	Q3	Q4	Q5	Q6	Q7	Q8	
+Stream 0:	2.6	4.3	0.7	3.7	4.0	4.3	24.1	10.5	
+Stream 1:	5.5	1.7	0.9	6.0	5.9	16.6	34.3	8.9	
+Stream 2:	4.2	1.5	0.7	23.0	7.7	5.8	34.4	14.7	
+Minimum: 	4.2	1.5	0.7	6.0	5.9	5.8	34.3	8.9	
+Maximum: 	5.5	1.7	0.9	23.0	7.7	16.6	34.4	14.7	
+Average: 	4.8	1.6	0.8	14.5	6.8	11.2	34.3	11.8	
+
+Query		Q9	Q10	Q11	Q12	Q13	Q14	Q15	Q16	
+Stream 0:	15.3	1.1	42.8	57.4	7.7	    	    	    	
+Stream 1:	16.9	2.3	68.2	74.8	11.4	    	    	    	
+Stream 2:	15.8	1.0	62.9	77.9	9.6	    	    	    	
+Minimum: 	15.8	1.0	62.9	74.8	9.6	    	    	    	
+Maximum: 	16.9	2.3	68.2	77.9	11.4	    	    	    	
+Average: 	16.4	1.7	65.5	76.3	10.5	    	    	    	
+
+Query		Q17	Q18	Q19	Q20	Q21	Q22	RF1	RF2	
+Stream 0:	    	    	    	    	    	    	    	    	
+Stream 1:	    	    	    	    	    	    	    	    	
+Stream 2:	    	    	    	    	    	    	    	    	
+Minimum: 	    	    	    	    	    	    	    	    	
+Maximum: 	    	    	    	    	    	    	    	    	
+Average: 	    	    	    	    	    	    	    	    	
+

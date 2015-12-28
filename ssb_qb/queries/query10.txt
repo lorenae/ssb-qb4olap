@@ -1,0 +1,43 @@
+PREFIX dc: <http://purl.org/dc/elements/1.1/> 
+PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#> 
+PREFIX qb: <http://purl.org/linked-data/cube#> 
+PREFIX refgovukyear: <http://reference.data.gov.uk/id/year/> 
+PREFIX refgovukmonth: <http://reference.data.gov.uk/id/month/> 
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX skosclass: <http://ddialliance.org/ontologies/skosclass#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfh: <http://lod2.eu/schemas/rdfh#> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX refgovukday: <http://reference.data.gov.uk/id/day/> 
+PREFIX rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#> 
+
+select ?c_city ?s_city ?d_year sum(?rdfh_lo_revenue) as ?lo_revenue  
+
+from <http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb>  from <http://lod2.eu/schemas/rdfh#ssb1_ttl_dsd> from <http://lod2.eu/schemas/rdfh#ssb1_ttl_levels> 
+
+where {  
+
+?obs qb:dataSet rdfh-inst:ds.  
+?obs rdfh:lo_orderdate  ?d_date. 
+?d_yearmonthnum skos:narrower  ?d_date.
+?d_yearmonth skos:narrower  ?d_yearmonthnum. 
+?d_year skos:narrower  ?d_yearmonth.  
+rdfh:lo_orderdateYearLevel skos:member  ?d_year. 
+
+?obs rdfh:lo_custkey ?c_customer.
+?c_city skos:narrower  ?c_customer.
+rdfh:lo_custkeyCityLevel skos:member  ?c_city.
+ 
+?obs rdfh:lo_suppkey ?s_supplier.
+?s_city skos:narrower  ?s_supplier.
+rdfh:lo_suppkeyCityLevel skos:member  ?s_city.
+ 
+?obs rdfh:lo_revenue ?rdfh_lo_revenue. 
+
+FILTER(?c_city = rdfh:lo_custkeyCityUNITED-KI1 OR ?c_city = rdfh:lo_custkeyCityUNITED-KI5).
+FILTER(?s_city = rdfh:lo_suppkeyCityUNITED-KI1 OR ?s_city = rdfh:lo_suppkeyCityUNITED-KI5).
+FILTER(?d_yearmonth = rdfh:lo_orderdateYearMonthDec1997).
+
+} group by ?d_year ?c_city ?s_city order by asc(?d_year) desc(?lo_revenue)

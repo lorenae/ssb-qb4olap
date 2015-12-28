@@ -1,0 +1,42 @@
+PREFIX dc: <http://purl.org/dc/elements/1.1/> 
+PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#> 
+PREFIX qb: <http://purl.org/linked-data/cube#> 
+PREFIX refgovukyear: <http://reference.data.gov.uk/id/year/> 
+PREFIX refgovukmonth: <http://reference.data.gov.uk/id/month/> 
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX skosclass: <http://ddialliance.org/ontologies/skosclass#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfh: <http://lod2.eu/schemas/rdfh#> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX refgovukday: <http://reference.data.gov.uk/id/day/> 
+PREFIX rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#> 
+select  ?rdfh_lo_orderdate ?rdfh_lo_partkey sum(?rdfh_lo_revenue) as ?lo_revenue
+
+from <http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb>  from <http://lod2.eu/schemas/rdfh#ssb1_ttl_dsd> from <http://lod2.eu/schemas/rdfh#ssb1_ttl_levels> 
+
+where {  
+
+?obs qb:dataSet rdfh-inst:ds.  
+?obs rdfh:lo_orderdate  ?rdfh_lo_orderdate0. 
+?rdfh_lo_orderdate1 skos:narrower ?rdfh_lo_orderdate0.
+?rdfh_lo_orderdate2 skos:narrower ?rdfh_lo_orderdate1. 
+?rdfh_lo_orderdate skos:narrower ?rdfh_lo_orderdate2.  
+rdfh:lo_orderdateYearLevel skos:member ?rdfh_lo_orderdate. 
+
+?obs rdfh:lo_partkey ?rdfh_lo_partkey0.
+?rdfh_lo_partkey skos:narrower ?rdfh_lo_partkey0.
+rdfh:lo_partkeyBrand1Level skos:member ?rdfh_lo_partkey.
+ 
+?obs rdfh:lo_suppkey ?rdfh_lo_suppkey0.
+?rdfh_lo_suppkey1 skos:narrower ?rdfh_lo_suppkey0.
+?rdfh_lo_suppkey2 skos:narrower ?rdfh_lo_suppkey1.
+?rdfh_lo_suppkey skos:narrower ?rdfh_lo_suppkey2.
+ 
+?obs rdfh:lo_revenue ?rdfh_lo_revenue. 
+
+FILTER ( str(?rdfh_lo_partkey) >= rdfh:lo_partkeyBrand1MFGR-2221 and str(?rdfh_lo_partkey) <= rdfh:lo_partkeyBrand1MFGR-2228)
+FILTER(?rdfh_lo_suppkey = rdfh:lo_suppkeyRegionASIA ).
+
+} group by ?rdfh_lo_orderdate ?rdfh_lo_partkey order by ?rdfh_lo_orderdate ?rdfh_lo_partkey 

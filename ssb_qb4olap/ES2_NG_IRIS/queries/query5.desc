@@ -1,0 +1,13 @@
+{QueryType:Select,
+results: [
+{column:rdfh_lo_orderdate,
+type:int
+},
+{column:rdfh_lo_partkey,
+type:str
+},
+{column:lo_revenue,
+type:int	
+}
+]
+}

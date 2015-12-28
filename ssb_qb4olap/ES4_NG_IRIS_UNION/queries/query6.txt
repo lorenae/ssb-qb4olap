@@ -1,0 +1,39 @@
+PREFIX qb: <http://purl.org/linked-data/cube#> 
+PREFIX qb4o: <http://purl.org/qb4olap/cubes#> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+SELECT ?plm2 ?plm3  (SUM(<http://www.w3.org/2001/XMLSchema#float>(?m4)) as ?ag1) 
+FROM NAMED <http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap> 
+FROM NAMED <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> 
+WHERE { 
+{GRAPH <http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap> {
+ ?o a qb:Observation .
+?o qb:dataSet <http://lod2.eu/schemas/rdfh-inst#ds> .
+?o <http://lod2.eu/schemas/rdfh#lo_revenue> ?m4 .
+?o <http://lod2.eu/schemas/rdfh#lo_orderdate> ?lm1 .
+?o <http://lod2.eu/schemas/rdfh#lo_partkey> ?lm2 .
+?o <http://lod2.eu/schemas/rdfh#lo_suppkey> ?lm3
+}}.
+{GRAPH <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> {
+?lm1 qb4o:memberOf <http://lod2.eu/schemas/rdfh#lo_orderdate> .
+?lm1 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#dateInMonth> ?plm1 .
+?plm1 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#month> .
+?plm1 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#monthInYear> ?plm2 .
+?plm2 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#year> .
+
+?lm2 qb4o:memberOf <http://lod2.eu/schemas/rdfh#lo_partkey> .
+?lm2 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#hasBrand> ?plm3 .
+?plm3 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#brand> .
+
+?lm3 qb4o:memberOf <http://lod2.eu/schemas/rdfh#lo_suppkey> .
+?lm3 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#inCity> ?plm4 .
+?plm4 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#city> .
+?plm4 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#inNation> ?plm5 .
+?plm5 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#nation> .
+?plm5 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#inRegion> ?plm6 .
+?plm6 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#region> .
+?plm6 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#regionName> "EUROPE" .
+?plm3 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#brandName> "MFGR#2239" .
+ 
+ }} }
+GROUP BY ?plm2 ?plm3 
+                                

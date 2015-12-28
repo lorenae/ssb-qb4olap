@@ -1,0 +1,328 @@
+
+Q1.1 (1) ({ALL, ALL, ALL, ALL, ALL, ALL}, {yearLevel = 1993, 1 < discountLevel < 3, quantityLevel < 25}, {sum_revenue})
+
+SUM(?rdfh_lo_extendedprice * ?rdfh_lo_discount) as ?sum_revenue
+
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>;
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;
+
+QUERY
+
+$C1 := SLICE(rdfh-inst:ds, ssb-qb4olap:customerDim );
+$C2 := SLICE($C1, ssb-qb4olap:supplierDim );
+$C3 := SLICE($C2, ssb-qb4olap:partsDim );
+$C4 := SLICE($C3, MEASURES(rdfh:sum_revenue));
+$C5 := SLICE($C4, MEASURES(rdfh:lo_revenue));
+$C6 := SLICE($C5, MEASURES(rdfh:lo_supplycost));
+$C7 := SLICE($C6, MEASURES(rdfh:sum_profit));
+$C8 := DICE ($C7, rdfh:lo_quantity<= 24 );
+$C9 := DICE ($C8, rdfh:lo_discount>=1 AND rdfh:lo_discount<=3);
+$C10 := SLICE($C9, MEASURES(rdfh:lo_quantity));
+$C11 := ROLLUP ($C10, ssb-qb4olap:timeDim, ssb-qb4olap:year);
+$C12 := DICE ($C11, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum = 1993));
+$C13 := SLICE($C12, ssb-qb4olap:timeDim );
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;\r\nprefix rdfh: <http://lod2.eu/schemas/rdfh#>;\r\nprefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;\r\nQUERY\r\n$C1 := SLICE(rdfh-inst:ds, ssb-qb4olap:customerDim );\r\n$C2 := SLICE($C1, ssb-qb4olap:supplierDim );\r\n$C3 := SLICE($C2, ssb-qb4olap:partsDim );\r\n$C4 := SLICE($C3, MEASURES(rdfh:sum_revenue));\r\n$C5 := SLICE($C4, MEASURES(rdfh:lo_revenue));\r\n$C6 := SLICE($C5, MEASURES(rdfh:lo_supplycost));\r\n$C7 := SLICE($C6, MEASURES(rdfh:sum_profit));\r\n$C8 := DICE ($C7, rdfh:lo_quantity<= 24 );\r\n$C9 := DICE ($C8, rdfh:lo_discount>=1 AND rdfh:lo_discount<=3);\r\n$C10 := SLICE($C9, MEASURES(rdfh:lo_quantity));\r\n$C11 := ROLLUP ($C10, ssb-qb4olap:timeDim, ssb-qb4olap:year);\r\n$C12 := DICE ($C11, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum = 1993));\r\n$C13 := SLICE($C12, ssb-qb4olap:timeDim );
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+
+Q1.2 (2)({ALL, ALL, ALL, ALL, ALL, ALL}, {yearmonthnumLevel = 199401, 4 < discountLevel < 6, 26 < quantityLevel < 35}, {sum_revenue})
+SUM(?rdfh_lo_extendedprice * ?rdfh_lo_discount) as ?sum_revenue
+
+
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>;
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;
+
+QUERY
+
+$C1 := SLICE(rdfh-inst:ds, ssb-qb4olap:customerDim );
+$C2 := SLICE($C1, ssb-qb4olap:supplierDim );
+$C3 := SLICE($C2, ssb-qb4olap:partsDim );
+$C4 := SLICE($C3, MEASURES(rdfh:sum_revenue));
+$C5 := SLICE($C4, MEASURES(rdfh:lo_revenue));
+$C6 := SLICE($C5, MEASURES(rdfh:lo_supplycost));
+$C7 := SLICE($C6, MEASURES(rdfh:sum_profit));
+$C8 := DICE ($C7, rdfh:lo_quantity>=26 AND rdfh:lo_quantity<=35);
+$C9 := SLICE($C8, MEASURES(rdfh:lo_quantity));
+$C10 := DICE ($C9, rdfh:lo_discount>=4 AND rdfh:lo_discount<=6);
+$C11 := ROLLUP ($C10, ssb-qb4olap:timeDim, ssb-qb4olap:month);
+$C12 := DICE ($C11, (ssb-qb4olap:timeDim|ssb-qb4olap:month|ssb-qb4olap:yearmonthnum = 199401));
+$C13 := SLICE($C12, ssb-qb4olap:timeDim );
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;\r\nprefix rdfh: <http://lod2.eu/schemas/rdfh#>;\r\nprefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;\r\nQUERY\r\n $C1 := SLICE(rdfh-inst:ds, ssb-qb4olap:customerDim );\r\n$C2 := SLICE($C1, ssb-qb4olap:supplierDim );\r\n$C3 := SLICE($C2, ssb-qb4olap:partsDim );\r\n$C4 := SLICE($C3, MEASURES(rdfh:sum_revenue));\r\n$C5 := SLICE($C4, MEASURES(rdfh:lo_revenue));\r\n$C6 := SLICE($C5, MEASURES(rdfh:lo_supplycost));\r\n$C7 := SLICE($C6, MEASURES(rdfh:sum_profit));\r\n$C8 := DICE ($C7, rdfh:lo_quantity>=26 AND rdfh:lo_quantity<=35);\r\n$C9 := SLICE($C8, MEASURES(rdfh:lo_quantity));\r\n$C10 := DICE ($C9, rdfh:lo_discount>=4 AND rdfh:lo_discount<=6);\r\n$C11 := ROLLUP ($C10, ssb-qb4olap:timeDim, ssb-qb4olap:month);\r\n$C12 := DICE ($C11, (ssb-qb4olap:timeDim|ssb-qb4olap:month|ssb-qb4olap:yearmonthnum = 199401));\r\n$C13 := SLICE($C12, ssb-qb4olap:timeDim );
+
+
+Q1.3 (3)({ALL, ALL, ALL, ALL, ALL, ALL}, {5 < discountLevel < 7, 26 < quantityLevel < 35}, {sum_revenue})
+
+SUM(?rdfh_lo_extendedprice * ?rdfh_lo_discount) as ?sum_revenue
+
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>;
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;
+QUERY
+
+$C1 := SLICE(rdfh-inst:ds, ssb-qb4olap:customerDim );
+$C2 := SLICE($C1, ssb-qb4olap:supplierDim );
+$C3 := SLICE($C2, ssb-qb4olap:partsDim );
+$C4 := SLICE($C3, MEASURES(rdfh:sum_revenue));
+$C5 := SLICE($C4, MEASURES(rdfh:lo_revenue));
+$C6 := SLICE($C5, MEASURES(rdfh:lo_supplycost));
+$C7 := SLICE($C6, MEASURES(rdfh:sum_profit));
+$C8 := DICE ($C7, rdfh:lo_quantity>=26 AND rdfh:lo_quantity<=35);
+$C9 := SLICE($C8, MEASURES(rdfh:lo_quantity));
+$C10 := DICE ($C9, rdfh:lo_discount>=5 AND rdfh:lo_discount<=7);
+$C11 := ROLLUP ($C10, ssb-qb4olap:timeDim, ssb-qb4olap:week);
+$C12 := DICE ($C11, (ssb-qb4olap:timeDim|ssb-qb4olap:week|ssb-qb4olap:yearweeknum = 19946));
+$C13 := SLICE($C12, ssb-qb4olap:timeDim );
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;\r\nprefix rdfh: <http://lod2.eu/schemas/rdfh#>;\r\nprefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;\r\nQUERY\r\n$C1 := SLICE(rdfh-inst:ds, ssb-qb4olap:customerDim );\r\n$C2 := SLICE($C1, ssb-qb4olap:supplierDim );\r\n$C3 := SLICE($C2, ssb-qb4olap:partsDim );\r\n$C4 := SLICE($C3, MEASURES(rdfh:sum_revenue));\r\n$C5 := SLICE($C4, MEASURES(rdfh:lo_revenue));\r\n$C6 := SLICE($C5, MEASURES(rdfh:lo_supplycost));\r\n$C7 := SLICE($C6, MEASURES(rdfh:sum_profit));\r\n$C8 := DICE ($C7, rdfh:lo_quantity>=26 AND rdfh:lo_quantity<= 35);\r\n$C9 := SLICE($C8, MEASURES(rdfh:lo_quantity));\r\n$C10 := DICE ($C9, rdfh:lo_discount>=5 AND rdfh:lo_discount<=7);\r\n$C11 := ROLLUP ($C10, ssb-qb4olap:timeDim, ssb-qb4olap:week);\r\n$C12 := DICE ($C11, (ssb-qb4olap:timeDim|ssb-qb4olap:week|ssb-qb4olap:yearweeknum = 19946));\r\n$C13 := SLICE($C12, ssb-qb4olap:timeDim );
+
+
+Q2.1 (4) ({yearLevel, ALL, categoryLevel, ALL, ALL, ALL}, {categoryLevel = MFGR#12, s_regionLevel = AMERICA}, {lo_revenue})
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>;
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;
+QUERY
+
+$C1 := SLICE(rdfh-inst:ds, ssb-qb4olap:customerDim );
+$C3 := SLICE($C2, MEASURES(rdfh:lo_extendedprice));
+$C4 := SLICE($C3, MEASURES(rdfh:sum_revenue));
+$C5 := SLICE($C4, MEASURES(rdfh:lo_supplycost));
+$C6 := SLICE($C5, MEASURES(rdfh:sum_profit));
+$C7 := SLICE($C6, MEASURES(rdfh:lo_quantity));
+$C8 := SLICE($C7, MEASURES(rdfh:lo_discount));
+$C9 := ROLLUP ($C8, ssb-qb4olap:supplierDim, ssb-qb4olap:region);
+$C10 := ROLLUP ($C9, ssb-qb4olap:partsDim, ssb-qb4olap:category);
+$C11 := ROLLUP ($C10, ssb-qb4olap:timeDim, ssb-qb4olap:year);
+$C12 := DICE ($C11, (ssb-qb4olap:supplierDim|ssb-qb4olap:region|ssb-qb4olap:regionName = "AMERICA"));
+$C13 := DICE ($C12, (ssb-qb4olap:partsDim|ssb-qb4olap:category|ssb-qb4olap:categoryName = "MFGR#12"));
+$C14:= SLICE($C13, ssb-qb4olap:supplierDim );
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;\r\nprefix rdfh: <http://lod2.eu/schemas/rdfh#>;\r\nprefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;\r\nQUERY\r\n$C1 := SLICE(rdfh-inst:ds, ssb-qb4olap:customerDim );\r\n$C3 := SLICE($C2, MEASURES(rdfh:lo_extendedprice));\r\n$C4 := SLICE($C3, MEASURES(rdfh:sum_revenue));\r\n$C5 := SLICE($C4, MEASURES(rdfh:lo_supplycost));\r\n$C6 := SLICE($C5, MEASURES(rdfh:sum_profit));\r\n$C7 := SLICE($C6, MEASURES(rdfh:lo_quantity));\r\n$C8 := SLICE($C7, MEASURES(rdfh:lo_discount));\r\n$C9 := ROLLUP ($C8, ssb-qb4olap:supplierDim, ssb-qb4olap:region);\r\n$C10 := ROLLUP ($C9, ssb-qb4olap:partsDim, ssb-qb4olap:category);\r\n$C11 := ROLLUP ($C10, ssb-qb4olap:timeDim, ssb-qb4olap:year);\r\n$C12 := DICE ($C11, (ssb-qb4olap:supplierDim|ssb-qb4olap:region|ssb-qb4olap:regionName = \"AMERICA\"));\r\n$C13 := DICE ($C12, (ssb-qb4olap:partsDim|ssb-qb4olap:category|ssb-qb4olap:categoryName = \"MFGR#12\"));\r\n$C13 := SLICE($C13, ssb-qb4olap:supplierDim );
+
+Q2.2 (5)({yearLevel, ALL, brand1Level, s_regionLevel, ALL, ALL}, {brand1Level = MFGR#2221 OR ... OR brand1level = MFGR#2228, s_regionLevel = ASIA}, {lo_revenue})
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>;
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;
+QUERY
+
+$C1 := SLICE(rdfh-inst:ds, ssb-qb4olap:customerDim );
+$C3 := SLICE($C2, MEASURES(rdfh:lo_extendedprice));
+$C4 := SLICE($C3, MEASURES(rdfh:sum_revenue));
+$C5 := SLICE($C4, MEASURES(rdfh:lo_supplycost));
+$C6 := SLICE($C5, MEASURES(rdfh:sum_profit));
+$C7 := SLICE($C6, MEASURES(rdfh:lo_quantity));
+$C8 := SLICE($C7, MEASURES(rdfh:lo_discount));
+$C9 := ROLLUP ($C8, ssb-qb4olap:supplierDim, ssb-qb4olap:region);
+$C10 := ROLLUP ($C9, ssb-qb4olap:partsDim, ssb-qb4olap:brand);
+$C11 := ROLLUP ($C10, ssb-qb4olap:timeDim, ssb-qb4olap:year);
+$C12 := DICE ($C11, (ssb-qb4olap:supplierDim|ssb-qb4olap:region|ssb-qb4olap:regionName = "ASIA"));
+$C13 := DICE ($C12, (ssb-qb4olap:partsDim|ssb-qb4olap:brand|ssb-qb4olap:brandName >= "MFGR#2221"));
+$C14 := DICE ($C13, (ssb-qb4olap:partsDim|ssb-qb4olap:brand|ssb-qb4olap:brandName <= "MFGR#2228"));
+$C15 := SLICE($C14, ssb-qb4olap:supplierDim );
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;\r\nprefix rdfh: <http://lod2.eu/schemas/rdfh#>;\r\nprefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;\r\nQUERY\r\n$C1 := SLICE(rdfh-inst:ds, ssb-qb4olap:customerDim );\r\n$C3 := SLICE($C2, MEASURES(rdfh:lo_extendedprice));\r\n$C4 := SLICE($C3, MEASURES(rdfh:sum_revenue));\r\n$C5 := SLICE($C4, MEASURES(rdfh:lo_supplycost));\r\n$C6 := SLICE($C5, MEASURES(rdfh:sum_profit));\r\n$C7 := SLICE($C6, MEASURES(rdfh:lo_quantity));\r\n$C8 := SLICE($C7, MEASURES(rdfh:lo_discount));\r\n$C9 := ROLLUP ($C8, ssb-qb4olap:supplierDim, ssb-qb4olap:region);\r\n$C10 := ROLLUP ($C9, ssb-qb4olap:partsDim, ssb-qb4olap:brand);\r\n$C11 := ROLLUP ($C10, ssb-qb4olap:timeDim, ssb-qb4olap:year);\r\n$C12 := DICE ($C11, (ssb-qb4olap:supplierDim|ssb-qb4olap:region|ssb-qb4olap:regionName = \"ASIA\"));\r\n$C13 := DICE ($C12, (ssb-qb4olap:partsDim|ssb-qb4olap:brand|ssb-qb4olap:brandName >= \"MFGR#2221\"));\r\n$C14 := DICE ($C13, (ssb-qb4olap:partsDim|ssb-qb4olap:brand|ssb-qb4olap:brandName <= \"MFGR#2228\"))\r\n$C14:= SLICE($C13, ssb-qb4olap:supplierDim );
+
+
+Q2.3 (6)({yearLevel, ALL, brand1Level, s_regionLevel, ALL, ALL}, {brand1Level = MFGR#2239, s_regionLevel = EUROPE}, {lo_revenue})
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>;
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;
+QUERY
+
+$C1 := SLICE(rdfh-inst:ds, ssb-qb4olap:customerDim );
+$C3 := SLICE($C2, MEASURES(rdfh:lo_extendedprice));
+$C4 := SLICE($C3, MEASURES(rdfh:sum_revenue));
+$C5 := SLICE($C4, MEASURES(rdfh:lo_supplycost));
+$C6 := SLICE($C5, MEASURES(rdfh:sum_profit));
+$C7 := SLICE($C6, MEASURES(rdfh:lo_quantity));
+$C8 := SLICE($C7, MEASURES(rdfh:lo_discount));
+$C9 := ROLLUP ($C8, ssb-qb4olap:supplierDim, ssb-qb4olap:region);
+$C10 := ROLLUP ($C9, ssb-qb4olap:partsDim, ssb-qb4olap:brand);
+$C11 := ROLLUP ($C10, ssb-qb4olap:timeDim, ssb-qb4olap:year);
+$C12 := DICE ($C11, (ssb-qb4olap:supplierDim|ssb-qb4olap:region|ssb-qb4olap:regionName = "EUROPE"));
+$C13 := DICE ($C12, (ssb-qb4olap:partsDim|ssb-qb4olap:brand|ssb-qb4olap:brandName = "MFGR#2239"));
+$C14 := SLICE($C13, ssb-qb4olap:supplierDim );
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;\r\nprefix rdfh: <http://lod2.eu/schemas/rdfh#>;\r\nprefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;\r\nQUERY\r\n$C1 := SLICE(rdfh-inst:ds, ssb-qb4olap:customerDim );\r\n$C3 := SLICE($C2, MEASURES(rdfh:lo_extendedprice));\r\n$C4 := SLICE($C3, MEASURES(rdfh:sum_revenue));\r\n$C5 := SLICE($C4, MEASURES(rdfh:lo_supplycost));\r\n$C6 := SLICE($C5, MEASURES(rdfh:sum_profit));\r\n$C7 := SLICE($C6, MEASURES(rdfh:lo_quantity));\r\n$C8 := SLICE($C7, MEASURES(rdfh:lo_discount));\r\n$C9 := ROLLUP ($C8, ssb-qb4olap:supplierDim, ssb-qb4olap:region);\r\n$C10 := ROLLUP ($C9, ssb-qb4olap:partsDim, ssb-qb4olap:brand);\r\n$C11 := ROLLUP ($C10, ssb-qb4olap:timeDim, ssb-qb4olap:year);\r\n$C12 := DICE ($C11, (ssb-qb4olap:supplierDim|ssb-qb4olap:region|ssb-qb4olap:regionName = \"EUROPE\"));\r\n$C13 := DICE ($C12, (ssb-qb4olap:partsDim|ssb-qb4olap:brand|ssb-qb4olap:brandName = \"MFGR#2239\"))\r\n$C14 := SLICE($C13, ssb-qb4olap:supplierDim );
+
+Q3.1 (7)({yearLevel, c_nationLevel, ALL, s_nationLevel, ALL, ALL}, {1992 ≤ yearLevel ≤ 1997, c_nationLevel = ASIA, s_nationLevel = ASIA}, {lo_revenue})
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>;
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;
+QUERY
+
+$C1 := SLICE(rdfh-inst:ds, MEASURES(rdfh:lo_extendedprice));
+$C2 := SLICE($C1, MEASURES(rdfh:sum_revenue));
+$C3 := SLICE($C2, MEASURES(rdfh:lo_supplycost));
+$C4 := SLICE($C3, MEASURES(rdfh:sum_profit));
+$C5 := SLICE($C4, MEASURES(rdfh:lo_quantity));
+$C6 := SLICE($C5, MEASURES(rdfh:lo_discount));
+$C7 := ROLLUP ($C6, ssb-qb4olap:supplierDim, ssb-qb4olap:region);
+$C8 := ROLLUP ($C7, ssb-qb4olap:customerDim, ssb-qb4olap:region);
+$C9 := ROLLUP ($C8, ssb-qb4olap:timeDim, ssb-qb4olap:year);
+$C10 := DICE ($C9, (ssb-qb4olap:supplierDim|ssb-qb4olap:region|ssb-qb4olap:regionName = "ASIA"));
+$C11 := DICE ($C10, (ssb-qb4olap:customerDim|ssb-qb4olap:region|ssb-qb4olap:regionName = "ASIA"));
+$C12 := DICE ($C11, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum >= 1992));
+$C13 := DICE ($C12, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum <= 1997));
+$C14 := SLICE ($C13, ssb-qb4olap:partsDim);
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;\r\nprefix rdfh: <http://lod2.eu/schemas/rdfh#>;\r\nprefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;\r\nQUERY\r\n$C1 := SLICE(rdfh-inst:ds, MEASURES(rdfh:lo_extendedprice));\r\n$C2 := SLICE($C1, MEASURES(rdfh:sum_revenue));\r\n$C3 := SLICE($C2, MEASURES(rdfh:lo_supplycost));\r\n$C4 := SLICE($C3, MEASURES(rdfh:sum_profit));\r\n$C5 := SLICE($C4, MEASURES(rdfh:lo_quantity));\r\n$C6 := SLICE($C5, MEASURES(rdfh:lo_discount));\r\n$C7 := ROLLUP ($C6, ssb-qb4olap:supplierDim, ssb-qb4olap:region);\r\n$C8 := ROLLUP ($C7, ssb-qb4olap:customerDim, ssb-qb4olap:region);\r\n$C9 := ROLLUP ($C8, ssb-qb4olap:timeDim, ssb-qb4olap:year);\r\n$C10 := DICE ($C9, (ssb-qb4olap:supplierDim|ssb-qb4olap:region|ssb-qb4olap:regionName = \"ASIA\"));\r\n$C11 := DICE ($C10, (ssb-qb4olap:customerDim|ssb-qb4olap:region|ssb-qb4olap:regionName = \"ASIA\"));\r\n$C12 := DICE ($C11, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum >= 1992));\r\n$C13 := DICE ($C12, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum <= 1997));\r\n$C14 := SLICE ($C13, ssb-qb4olap:partsDim);
+
+Q3.2 (8)(yearLevel, c_cityLevel, ALL, s_cityLevel, ALL, ALL}, {1992 ≤ yearLevel ≤ 1997, c_nationLevel = 'UNITED STATES', s_nationLevel = UNITED STATES}, {lo_revenue})
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>;
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;
+QUERY
+
+$C1 := SLICE(rdfh-inst:ds, MEASURES(rdfh:lo_extendedprice));
+$C2 := SLICE($C1, MEASURES(rdfh:sum_revenue));
+$C3 := SLICE($C2, MEASURES(rdfh:lo_supplycost));
+$C4 := SLICE($C3, MEASURES(rdfh:sum_profit));
+$C5 := SLICE($C4, MEASURES(rdfh:lo_quantity));
+$C6 := SLICE($C5, MEASURES(rdfh:lo_discount));
+$C7 := ROLLUP ($C6, ssb-qb4olap:supplierDim, ssb-qb4olap:nation);
+$C8 := ROLLUP ($C7, ssb-qb4olap:customerDim, ssb-qb4olap:nation);
+$C9 := ROLLUP ($C8, ssb-qb4olap:timeDim, ssb-qb4olap:year);
+$C10 := DICE ($C9, (ssb-qb4olap:supplierDim|ssb-qb4olap:nation|ssb-qb4olap:nationName = "UNITED STATES"));
+$C11 := DICE ($C10, (ssb-qb4olap:customerDim|ssb-qb4olap:nation|ssb-qb4olap:nationName = "UNITED STATES"));
+$C12 := DICE ($C11, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum >= 1992));
+$C13 := DICE ($C12, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum <= 1997));
+$C14 := SLICE ($C13, ssb-qb4olap:partsDim);
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;\r\nprefix rdfh: <http://lod2.eu/schemas/rdfh#>;\r\nprefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;\r\nQUERY\r\n$C1 := SLICE(rdfh-inst:ds, MEASURES(rdfh:lo_extendedprice));\r\n$C2 := SLICE($C1, MEASURES(rdfh:sum_revenue));\r\n$C3 := SLICE($C2, MEASURES(rdfh:lo_supplycost));\r\n$C4 := SLICE($C3, MEASURES(rdfh:sum_profit));\r\n$C5 := SLICE($C4, MEASURES(rdfh:lo_quantity));\r\n$C6 := SLICE($C5, MEASURES(rdfh:lo_discount));\r\n$C7 := ROLLUP ($C6, ssb-qb4olap:supplierDim, ssb-qb4olap:nation);\r\n$C8 := ROLLUP ($C7, ssb-qb4olap:customerDim, ssb-qb4olap:nation);\r\n$C9 := ROLLUP ($C8, ssb-qb4olap:timeDim, ssb-qb4olap:year);\r\n$C10 := DICE ($C9, (ssb-qb4olap:supplierDim|ssb-qb4olap:nation|ssb-qb4olap:nationName = \"UNITED STATES\"));\r\n$C11 := DICE ($C10, (ssb-qb4olap:customerDim|ssb-qb4olap:nation|ssb-qb4olap:nationName = \"UNITED STATES\"));\r\n$C12 := DICE ($C11, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum >= 1992));\r\n$C13 := DICE ($C12, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum <= 1997));\r\n$C14 := SLICE ($C13, ssb-qb4olap:partsDim);
+
+
+Q3.3 (9)({yearLevel, c_cityLevel, ALL, s_cityLevel, ALL, ALL}, {1992 ≤ yearLevel ≤ 1997, c_cityLevel = UNITED KI1 OR c_cityLevel = UNITED KI5, s_cityLevel = UNITED KI1 OR s_cityLevel = UNITED KI5}, {lo_revenue})
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>;
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;
+QUERY
+
+$C1 := SLICE(rdfh-inst:ds, MEASURES(rdfh:lo_extendedprice));
+$C2 := SLICE($C1, MEASURES(rdfh:sum_revenue));
+$C3 := SLICE($C2, MEASURES(rdfh:lo_supplycost));
+$C4 := SLICE($C3, MEASURES(rdfh:sum_profit));
+$C5 := SLICE($C4, MEASURES(rdfh:lo_quantity));
+$C6 := SLICE($C5, MEASURES(rdfh:lo_discount));
+$C7 := ROLLUP ($C6, ssb-qb4olap:supplierDim, ssb-qb4olap:city);
+$C8 := ROLLUP ($C7, ssb-qb4olap:customerDim, ssb-qb4olap:city);
+$C9 := ROLLUP ($C8, ssb-qb4olap:timeDim, ssb-qb4olap:year);
+$C10 := DICE ($C9, ((ssb-qb4olap:supplierDim|ssb-qb4olap:city|ssb-qb4olap:cityName = "UNITED KI1")OR (ssb-qb4olap:supplierDim|ssb-qb4olap:city|ssb-qb4olap:cityName = "UNITED KI5")));
+$C11 := DICE ($C10, ((ssb-qb4olap:customerDim|ssb-qb4olap:city|ssb-qb4olap:cityName = "UNITED KI1")OR(ssb-qb4olap:customerDim|ssb-qb4olap:city|ssb-qb4olap:cityName = "UNITED KI5")));
+$C12 := DICE ($C11, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum >= 1992));
+$C13 := DICE ($C12, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum <= 1997));
+$C14 := SLICE ($C13, ssb-qb4olap:partsDim);
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;\r\nprefix rdfh: <http://lod2.eu/schemas/rdfh#>;\r\nprefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;\r\nQUERY\r\n$C1 := SLICE(rdfh-inst:ds, MEASURES(rdfh:lo_extendedprice));\r\n$C2 := SLICE($C1, MEASURES(rdfh:sum_revenue));\r\n$C3 := SLICE($C2, MEASURES(rdfh:lo_supplycost));\r\n$C4 := SLICE($C3, MEASURES(rdfh:sum_profit));\r\n$C5 := SLICE($C4, MEASURES(rdfh:lo_quantity));\r\n$C6 := SLICE($C5, MEASURES(rdfh:lo_discount));\r\n$C7 := ROLLUP ($C6, ssb-qb4olap:supplierDim, ssb-qb4olap:city);\r\n$C8 := ROLLUP ($C7, ssb-qb4olap:customerDim, ssb-qb4olap:city);\r\n$C9 := ROLLUP ($C8, ssb-qb4olap:timeDim, ssb-qb4olap:year);\r\n$C10 := DICE ($C9, ((ssb-qb4olap:supplierDim|ssb-qb4olap:city|ssb-qb4olap:cityName = \"UNITED KI1\")OR (ssb-qb4olap:supplierDim|ssb-qb4olap:city|ssb-qb4olap:cityName = \"UNITED KI5\")));\r\n$C11 := DICE ($C10, ((ssb-qb4olap:customerDim|ssb-qb4olap:city|ssb-qb4olap:cityName = \"UNITED KI1\")OR (ssb-qb4olap:customerDim|ssb-qb4olap:city|ssb-qb4olap:cityName = \"UNITED KI5\")));\r\n$C12 := DICE ($C11, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum >= 1992));\r\n$C13 := DICE ($C12, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum <= 1997));\r\n$C14 := SLICE ($C13, ssb-qb4olap:partsDim);
+
+Q3.4 (10)({yearmonthLevel, c_cityLevel, ALL, s_cityLevel, ALL, ALL}, {yearmonthLevel = Dec1997, c_cityLevel = UNITED KI1 or c_cityLevel = UNITED KI5, s_cityLevel = UNITED KI1 or s_cityLevel = UNITED KI5}, {lo_revenue})
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>;
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;
+QUERY
+
+$C1 := SLICE(rdfh-inst:ds, MEASURES(rdfh:lo_extendedprice));
+$C2 := SLICE($C1, MEASURES(rdfh:sum_revenue));
+$C3 := SLICE($C2, MEASURES(rdfh:lo_supplycost));
+$C4 := SLICE($C3, MEASURES(rdfh:sum_profit));
+$C5 := SLICE($C4, MEASURES(rdfh:lo_quantity));
+$C6 := SLICE($C5, MEASURES(rdfh:lo_discount));
+$C7 := ROLLUP ($C6, ssb-qb4olap:supplierDim, ssb-qb4olap:city);
+$C8 := ROLLUP ($C7, ssb-qb4olap:customerDim, ssb-qb4olap:city);
+$C9 := ROLLUP ($C8, ssb-qb4olap:timeDim, ssb-qb4olap:month);
+$C10 := DICE ($C11, ((ssb-qb4olap:supplierDim|ssb-qb4olap:city|ssb-qb4olap:cityName = "UNITED KI1")OR(ssb-qb4olap:supplierDim|ssb-qb4olap:city|ssb-qb4olap:cityName = "UNITED KI5")));
+$C11 := DICE ($C10, ((ssb-qb4olap:customerDim|ssb-qb4olap:city|ssb-qb4olap:cityName = "UNITED KI1")OR (ssb-qb4olap:customerDim|ssb-qb4olap:city|ssb-qb4olap:cityName = "UNITED KI5")));
+$C12 := DICE ($C11, (ssb-qb4olap:timeDim|ssb-qb4olap:month|ssb-qb4olap:yearmonthnum = 199712));
+$C13 := SLICE ($C14, ssb-qb4olap:partsDim);
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;\r\nprefix rdfh: <http://lod2.eu/schemas/rdfh#>;\r\nprefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;\r\nQUERY\r\n$C1 := SLICE(rdfh-inst:ds, MEASURES(rdfh:lo_extendedprice));\r\n$C2 := SLICE($C1, MEASURES(rdfh:sum_revenue));\r\n$C3 := SLICE($C2, MEASURES(rdfh:lo_supplycost));\r\n$C4 := SLICE($C3, MEASURES(rdfh:sum_profit));\r\n$C5 := SLICE($C4, MEASURES(rdfh:lo_quantity));\r\n$C6 := SLICE($C5, MEASURES(rdfh:lo_discount));\r\n$C7 := ROLLUP ($C6, ssb-qb4olap:supplierDim, ssb-qb4olap:city);\r\n$C8 := ROLLUP ($C7, ssb-qb4olap:customerDim, ssb-qb4olap:city);\r\n$C9 := ROLLUP ($C8, ssb-qb4olap:timeDim, ssb-qb4olap:month);\r\n$C10 := DICE ($C11, ((ssb-qb4olap:supplierDim|ssb-qb4olap:city|ssb-qb4olap:cityName = \"UNITED KI1\")OR(ssb-qb4olap:supplierDim|ssb-qb4olap:city|ssb-qb4olap:cityName = \"UNITED KI5\")));\r\n$C11 := DICE ($C10, ((ssb-qb4olap:customerDim|ssb-qb4olap:city|ssb-qb4olap:cityName = \"UNITED KI1\")OR (ssb-qb4olap:customerDim|ssb-qb4olap:city|ssb-qb4olap:cityName = \"UNITED KI5\")));\r\n$C12 := DICE ($C11, (ssb-qb4olap:timeDim|ssb-qb4olap:month|ssb-qb4olap:yearmonthnum = 199712));\r\n$C13 := SLICE ($C14, ssb-qb4olap:partsDim);
+
+Q4.1 (11)({yearLevel, c_nationLevel, mfgrLevel, s_regionLevel, ALL, ALL}, {c_regionLevel = AMERICA, mfgrLevel = MFGR#1 OR mfgrLevel = MFGR#2, s_region = AMERICA}, {sum(?lo_revenue - ?lo_supplycost) as ?sum_profit})
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>;
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;
+QUERY
+
+$C1 := SLICE(rdfh-inst:ds, MEASURES(rdfh:lo_extendedprice));
+$C2 := SLICE($C1, MEASURES(rdfh:sum_revenue));
+$C4 := SLICE($C3, MEASURES(rdfh:sum_profit));
+$C5 := SLICE($C4, MEASURES(rdfh:lo_quantity));
+$C6 := SLICE($C5, MEASURES(rdfh:lo_discount));
+$C7 := ROLLUP ($C6, ssb-qb4olap:supplierDim, ssb-qb4olap:region);
+$C8 := ROLLUP ($C7, ssb-qb4olap:customerDim, ssb-qb4olap:region);
+$C9 := ROLLUP ($C8, ssb-qb4olap:timeDim, ssb-qb4olap:year);
+$C10 := ROLLUP ($C9, ssb-qb4olap:partsDim, ssb-qb4olap:manufacturer);
+$C11 := DICE ($C10, ssb-qb4olap:supplierDim|ssb-qb4olap:region|ssb-qb4olap:regionName = "AMERICA");
+$C12 := DICE ($C11, ssb-qb4olap:customerDim|ssb-qb4olap:region|ssb-qb4olap:regionName = "AMERICA");
+$C13 := DICE ($C12, ((ssb-qb4olap:partsDim|ssb-qb4olap:manufacturer|ssb-qb4olap:manufacturerName = "MFGR#1")OR (ssb-qb4olap:partsDim|ssb-qb4olap:manufacturer|ssb-qb4olap:manufacturerName = "MFGR#2")));
+$C14 := SLICE ($C13, ssb-qb4olap:partsDim);
+$C15 := SLICE ($C14, ssb-qb4olap:supplierDim);
+
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;\r\nprefix rdfh: <http://lod2.eu/schemas/rdfh#>;\r\nprefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;\r\nQUERY\r\n$C1 := SLICE(rdfh-inst:ds, MEASURES(rdfh:lo_extendedprice));\r\n$C2 := SLICE($C1, MEASURES(rdfh:sum_revenue));\r\n$C4 := SLICE($C3, MEASURES(rdfh:sum_profit));\r\n$C5 := SLICE($C4, MEASURES(rdfh:lo_quantity));\r\n$C6 := SLICE($C5, MEASURES(rdfh:lo_discount));\r\n$C7 := ROLLUP ($C6, ssb-qb4olap:supplierDim, ssb-qb4olap:region);\r\n$C8 := ROLLUP ($C7, ssb-qb4olap:customerDim, ssb-qb4olap:region);\r\n$C9 := ROLLUP ($C8, ssb-qb4olap:timeDim, ssb-qb4olap:year);\r\n$C10 := ROLLUP ($C9, ssb-qb4olap:partsDim, ssb-qb4olap:manufacturer);\r\n$C11 := DICE ($C10, ssb-qb4olap:supplierDim|ssb-qb4olap:region|ssb-qb4olap:regionName = \"AMERICA\");\r\n$C12 := DICE ($C11, ssb-qb4olap:customerDim|ssb-qb4olap:region|ssb-qb4olap:regionName = \"AMERICA\");\r\n$C13 := DICE ($C12, ((ssb-qb4olap:partsDim|ssb-qb4olap:manufacturer|ssb-qb4olap:manufacturerName = \"MFGR#1\")OR (ssb-qb4olap:partsDim|ssb-qb4olap:manufacturer|ssb-qb4olap:manufacturerName = \"MFGR#2\")));\r\n$C14 := SLICE ($C13, ssb-qb4olap:partsDim);\r\n$C15 := SLICE ($C14, ssb-qb4olap:supplierDim);
+
+
+Q4.2 (12)({yearLevel, c_regionLevel, categoryLevel, s_nationLevel, ALL, ALL}, {yearLevel = 1997 OR yearLevel = 1998, c_regionLevel = AMERICA, mfgrLevel = MFGR#1 OR mfgrLevel = MFGR#2 , s_regionLevel = AMERICA}, {sum_profit})
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>;
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;
+QUERY
+
+$C1 := SLICE(rdfh-inst:ds, MEASURES(rdfh:lo_extendedprice));
+$C2 := SLICE($C1, MEASURES(rdfh:sum_revenue));
+$C4 := SLICE($C3, MEASURES(rdfh:sum_profit));
+$C5 := SLICE($C4, MEASURES(rdfh:lo_quantity));
+$C6 := SLICE($C5, MEASURES(rdfh:lo_discount));
+$C7 := ROLLUP ($C6, ssb-qb4olap:supplierDim, ssb-qb4olap:region);
+$C8 := ROLLUP ($C7, ssb-qb4olap:customerDim, ssb-qb4olap:region);
+$C9 := ROLLUP ($C8, ssb-qb4olap:timeDim, ssb-qb4olap:year);
+$C10 := ROLLUP ($C9, ssb-qb4olap:partsDim, ssb-qb4olap:manufacturer);
+$C11 := DICE ($C10, ssb-qb4olap:supplierDim|ssb-qb4olap:region|ssb-qb4olap:regionName = "AMERICA");
+$C12 := DICE ($C11, ssb-qb4olap:customerDim|ssb-qb4olap:region|ssb-qb4olap:regionName = "AMERICA");
+$C13 := DICE ($C12, ((ssb-qb4olap:partsDim|ssb-qb4olap:manufacturer|ssb-qb4olap:manufacturerName = "MFGR#1")OR (ssb-qb4olap:partsDim|ssb-qb4olap:manufacturer|ssb-qb4olap:manufacturerName = "MFGR#2")));
+$C14 := DICE ($C13, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum >= 1997));
+$C15 := DICE ($C14, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum <= 1998));
+$C16 := SLICE ($C15, ssb-qb4olap:customerDim);
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;\r\nprefix rdfh: <http://lod2.eu/schemas/rdfh#>;\r\nprefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;\r\nQUERY\r\n$C1 := SLICE(rdfh-inst:ds, MEASURES(rdfh:lo_extendedprice));\r\n$C2 := SLICE($C1, MEASURES(rdfh:sum_revenue));\r\n$C4 := SLICE($C3, MEASURES(rdfh:sum_profit));\r\n$C5 := SLICE($C4, MEASURES(rdfh:lo_quantity));\r\n$C6 := SLICE($C5, MEASURES(rdfh:lo_discount));\r\n$C7 := ROLLUP ($C6, ssb-qb4olap:supplierDim, ssb-qb4olap:region);\r\n$C8 := ROLLUP ($C7, ssb-qb4olap:customerDim, ssb-qb4olap:region);\r\n$C9 := ROLLUP ($C8, ssb-qb4olap:timeDim, ssb-qb4olap:year);\r\n$C10 := ROLLUP ($C9, ssb-qb4olap:partsDim, ssb-qb4olap:manufacturer);\r\n$C11 := DICE ($C10, ssb-qb4olap:supplierDim|ssb-qb4olap:region|ssb-qb4olap:regionName = \"AMERICA\");\r\n$C12 := DICE ($C11, ssb-qb4olap:customerDim|ssb-qb4olap:region|ssb-qb4olap:regionName = \"AMERICA\");\r\n$C13 := DICE ($C12, ((ssb-qb4olap:partsDim|ssb-qb4olap:manufacturer|ssb-qb4olap:manufacturerName = \"MFGR#1\")OR (ssb-qb4olap:partsDim|ssb-qb4olap:manufacturer|ssb-qb4olap:manufacturerName = \"MFGR#2\")));$C14 := DICE ($C13, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum >= 1997));\r\n$C15 := DICE ($C14, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum <= 1998));\r\n$C16 := SLICE ($C15, ssb-qb4olap:customerDim);
+
+Q4.3 (13)({yearLevel, regionLevel, categoryLevel, cityLevel, ALL, ALL}, {yearLevel = 1997 OR yearLevel = 1998, c_regionLevel = AMERICA, categoryLevel = MFGR#14, s_nation = UNITED STATES}, {sum_profit})
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>;
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;
+QUERY
+
+$C1 := SLICE(rdfh-inst:ds, MEASURES(rdfh:lo_extendedprice));
+$C2 := SLICE($C1, MEASURES(rdfh:sum_revenue));
+$C4 := SLICE($C3, MEASURES(rdfh:sum_profit));
+$C5 := SLICE($C4, MEASURES(rdfh:lo_quantity));
+$C6 := SLICE($C5, MEASURES(rdfh:lo_discount));
+$C7 := ROLLUP ($C6, ssb-qb4olap:supplierDim, ssb-qb4olap:nation);
+$C8 := ROLLUP ($C7, ssb-qb4olap:customerDim, ssb-qb4olap:region);
+$C9 := ROLLUP ($C8, ssb-qb4olap:timeDim, ssb-qb4olap:year);
+$C10 := ROLLUP ($C9, ssb-qb4olap:partsDim, ssb-qb4olap:category);
+$C11 := DICE ($C10, ssb-qb4olap:supplierDim|ssb-qb4olap:nation|ssb-qb4olap:nationName = "UNITED STATES");
+$C12 := DICE ($C11, ssb-qb4olap:customerDim|ssb-qb4olap:region|ssb-qb4olap:regionName = "AMERICA");
+$C13 := DICE ($C12, (ssb-qb4olap:partsDim|ssb-qb4olap:category|ssb-qb4olap:categoryName = "MFGR#14"));
+$C14 := DICE ($C13, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum >= 1997));
+$C15 := DICE ($C14, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum <= 1998));
+$C16 := SLICE ($C15, ssb-qb4olap:customerDim);
+
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>;\r\nprefix rdfh: <http://lod2.eu/schemas/rdfh#>;\r\nprefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>;\r\nQUERY\r\n$C1 := SLICE(rdfh-inst:ds, MEASURES(rdfh:lo_extendedprice));\r\n$C2 := SLICE($C1, MEASURES(rdfh:sum_revenue));\r\n$C4 := SLICE($C3, MEASURES(rdfh:sum_profit));\r\n$C5 := SLICE($C4, MEASURES(rdfh:lo_quantity));\r\n$C6 := SLICE($C5, MEASURES(rdfh:lo_discount));\r\n$C7 := ROLLUP ($C6, ssb-qb4olap:supplierDim, ssb-qb4olap:nation);\r\n$C8 := ROLLUP ($C7, ssb-qb4olap:customerDim, ssb-qb4olap:region);\r\n$C9 := ROLLUP ($C8, ssb-qb4olap:timeDim, ssb-qb4olap:year);\r\n$C10 := ROLLUP ($C9, ssb-qb4olap:partsDim, ssb-qb4olap:category);\r\n$C11 := DICE ($C10, ssb-qb4olap:supplierDim|ssb-qb4olap:nation|ssb-qb4olap:nationName = \"UNITED STATES\");\r\n$C12 := DICE ($C11, ssb-qb4olap:customerDim|ssb-qb4olap:region|ssb-qb4olap:regionName = \"AMERICA\");\r\n$C13 := DICE ($C12, (ssb-qb4olap:partsDim|ssb-qb4olap:category|ssb-qb4olap:categoryName = \"MFGR#14\"));$C14 := DICE ($C13, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum >= 1997));\r\n$C15 := DICE ($C14, (ssb-qb4olap:timeDim|ssb-qb4olap:year|ssb-qb4olap:yearNum <= 1998));\r\n$C16 := SLICE ($C15, ssb-qb4olap:customerDim);
+

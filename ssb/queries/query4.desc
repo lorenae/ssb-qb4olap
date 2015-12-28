@@ -1,0 +1,14 @@
+{QueryType:Select,
+results: [
+{column:lo_revenue,
+type:int	
+},
+{column:d_year,
+type:int
+},
+{column:p_brand1,
+type:str
+}
+]
+}
+

@@ -1,0 +1,23 @@
+PREFIX qb: <http://purl.org/linked-data/cube#> 
+PREFIX qb4o: <http://purl.org/qb4olap/cubes#> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+SELECT (?ag1 * ?ag2) as ?sum_revenue
+ WHERE {{ ?plm1 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#yearmonthnum> ?plm11 .
+}.{ SELECT ?plm1  (SUM(<http://www.w3.org/2001/XMLSchema#float>(?m2)) as ?ag1)  (SUM(<http://www.w3.org/2001/XMLSchema#float>(?m3)) as ?ag2) 
+FROM <http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap> 
+FROM <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> 
+ WHERE { ?o a qb:Observation .
+?o qb:dataSet <http://lod2.eu/schemas/rdfh-inst#ds> .
+?o <http://lod2.eu/schemas/rdfh#lo_quantity> ?m1 .
+?o <http://lod2.eu/schemas/rdfh#lo_discount> ?m2 .
+?o <http://lod2.eu/schemas/rdfh#lo_extendedprice> ?m3 .
+?o <http://lod2.eu/schemas/rdfh#lo_revenue> ?m4 .
+?o <http://lod2.eu/schemas/rdfh#lo_supplycost> ?m5 .
+?o <http://lod2.eu/schemas/rdfh#lo_orderdate> ?lm1 .
+?lm1 qb4o:memberOf <http://lod2.eu/schemas/rdfh#lo_orderdate> .
+?lm1 <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#dateInMonth> ?plm1 .
+?plm1 qb4o:memberOf <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#month> .
+ FILTER ((((?m1 >= 26) && (?m1 <= 35)))&&(((?m2 >= 4) && (?m2 <= 6)))) }
+GROUP BY ?plm1 
+} FILTER (((?plm11=199401))) } 
+                                

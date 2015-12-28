@@ -1,0 +1,381 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfh: <http://lod2.eu/schemas/rdfh#> .
+@prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosclass: <http://ddialliance.org/ontologies/skosclass#> .
+@prefix xkos: <http://purl.org/linked-data/xkos#> .
+
+#new prefixes
+@prefix qb4o: <http://purl.org/qb4olap/cubes#> .
+@prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#> .
+@prefix dct:      <http://purl.org/dc/terms/> .
+
+#keep the same dataset (in order to not modify the observations)
+# SSB ds and dsd
+rdfh-inst:ds
+	a qb:DataSet ;
+	rdfs:label "Star Schema Benchmark Dataset";
+	qb:structure ssb-qb4olap:dsd;
+	dct:title "Star Schema Benchmark Dataset"@en.       
+
+ssb-qb4olap:dsd
+	a qb:DataStructureDefinition ;
+	qb:component [ qb4o:level rdfh:lo_orderdate ; qb4o:cardinality qb4o:ManyToOne ] ;
+	qb:component [ qb4o:level rdfh:lo_custkey ; qb4o:cardinality qb4o:ManyToOne ] ;
+	qb:component [ qb4o:level rdfh:lo_partkey ; qb4o:cardinality qb4o:ManyToOne ] ;
+	qb:component [ qb4o:level rdfh:lo_suppkey ; qb4o:cardinality qb4o:ManyToOne ] ;
+	qb:component [ qb:measure rdfh:lo_quantity; qb4o:aggregateFunction qb4o:sum ] ;
+	qb:component [ qb:measure rdfh:lo_discount; qb4o:aggregateFunction qb4o:sum ] ;
+	qb:component [ qb:measure rdfh:lo_extendedprice; qb4o:aggregateFunction qb4o:sum ] ;
+	qb:component [ qb:measure rdfh:lo_revenue; qb4o:aggregateFunction qb4o:sum ] ;
+	qb:component [ qb:measure rdfh:lo_supplycost; qb4o:aggregateFunction qb4o:sum ] ;
+	skos:notation "Star Schema Benchmark DSD using QB4OLAP v1.3" ;
+	rdfs:label "Star Schema Benchmark DSD using QB4OLAP v1.3";
+	dct:conformsTo <http://purl.org/qb4olap/cubes>.
+
+#Measures
+rdfh:lo_quantity a qb:MeasureProperty;
+	rdfs:label "Items in line order"@en;
+	rdfs:range xsd:integer .
+
+rdfh:lo_discount a qb:MeasureProperty;
+	rdfs:label "Discount"@en;
+	rdfs:range xsd:float .
+
+rdfh:lo_extendedprice a qb:MeasureProperty;
+	rdfs:label "Extended price"@en;
+	rdfs:range xsd:float .
+
+rdfh:lo_revenue a qb:MeasureProperty;
+	rdfs:label "Revenue"@en;
+	rdfs:range xsd:float .
+
+rdfh:lo_supplycost a qb:MeasureProperty;
+	rdfs:label "Supply Cost"@en;
+	rdfs:range xsd:float .
+
+
+
+# Dimensions 
+#-----------------------------------------------------------------------------------------------------
+# TIME dimension
+
+ssb-qb4olap:timeDim a qb:DimensionProperty ;
+ rdfs:label "Time dimension"@en ;
+ qb4o:hasHierarchy ssb-qb4olap:calendarHier.
+
+#dimension hierarchies
+ssb-qb4olap:calendarHier a qb4o:Hierarchy ;
+   rdfs:label "Calendar Hierarchy"@en ;
+   qb4o:inDimension ssb-qb4olap:timeDim;
+   qb4o:hasLevel rdfh:lo_orderdate, ssb-qb4olap:week, ssb-qb4olap:month,ssb-qb4olap:year.
+
+#hierarchy levels and attributes
+
+#date level
+rdfh:lo_orderdate a qb4o:LevelProperty;
+   rdfs:label "Date level"@en;
+   qb4o:hasAttribute rdfh:d_daynuminweek, rdfh:d_dayofweek, rdfh:d_daynuminmonth, rdfh:d_daynuminyear.
+
+rdfh:d_daynuminweek  a qb4o:LevelAttribute;
+    rdfs:label "Day number in week"@en ;
+    rdfs:range xsd:integer.
+
+rdfh:d_dayofweek  a qb4o:LevelAttribute;
+    rdfs:label "Day name week"@en ;
+    rdfs:range xsd:string.
+
+rdfh:d_daynuminmonth  a qb4o:LevelAttribute;
+    rdfs:label "Day number in month"@en ;
+    rdfs:range xsd:integer.
+
+rdfh:d_daynuminyear  a qb4o:LevelAttribute;
+    rdfs:label "Day number in year"@en ;
+    rdfs:range xsd:integer.            
+
+#week level
+ssb-qb4olap:week a qb4o:LevelProperty;
+   rdfs:label "Week level"@en;
+   qb4o:hasAttribute ssb-qb4olap:weekNbYear,ssb-qb4olap:yearweeknum.
+
+ssb-qb4olap:weekNbYear  a qb4o:LevelAttribute;
+    rdfs:label "Week number in year"@en ;
+    rdfs:range xsd:integer.
+
+ssb-qb4olap:yearweeknum  a qb4o:LevelAttribute;
+    rdfs:label "YYYYW as a number"@en ;
+    rdfs:range xsd:integer. 
+
+#month level
+ssb-qb4olap:month a qb4o:LevelProperty;
+   rdfs:label "Month level"@en;
+   qb4o:hasAttribute ssb-qb4olap:monthNbYear, ssb-qb4olap:monthName, ssb-qb4olap:yearmonthnum .
+
+ssb-qb4olap:monthNbYear  a qb4o:LevelAttribute;
+    rdfs:label "Month number in year"@en ;
+    rdfs:range xsd:integer.
+    
+ssb-qb4olap:yearmonthnum  a qb4o:LevelAttribute;
+    rdfs:label "YYYYMM as a number"@en ;
+    rdfs:range xsd:integer.   
+
+ssb-qb4olap:monthName  a qb4o:LevelAttribute;
+    rdfs:label "Month name"@en ;
+    rdfs:range xsd:string.
+
+#year level
+ssb-qb4olap:year a qb4o:LevelProperty;
+   rdfs:label "Year"@en;
+   qb4o:hasAttribute ssb-qb4olap:yearNum.
+
+ssb-qb4olap:yearNum  a qb4o:LevelAttribute;
+    rdfs:label "Year"@en ;
+    rdfs:range xsd:integer.
+
+
+#rollup relationships
+ssb-qb4olap:dateInWeek a qb4o:RollupProperty.
+ssb-qb4olap:dateInMonth a qb4o:RollupProperty.
+ssb-qb4olap:weekInYear a qb4o:RollupProperty.
+ssb-qb4olap:monthInYear a qb4o:RollupProperty.
+
+
+#hierarchy steps
+_:ih11 a qb4o:HierarchyStep;
+  qb4o:inHierarchy ssb-qb4olap:calendarHier;
+  qb4o:childLevel rdfh:lo_orderdate;
+  qb4o:parentLevel ssb-qb4olap:week;
+  qb4o:pcCardinality qb4o:ManyToOne;
+  qb4o:rollup ssb-qb4olap:dateInWeek.
+
+_:ih12 a qb4o:HierarchyStep;
+  qb4o:inHierarchy ssb-qb4olap:calendarHier;
+  qb4o:childLevel rdfh:lo_orderdate;
+  qb4o:parentLevel ssb-qb4olap:month;
+  qb4o:pcCardinality qb4o:ManyToOne;
+  qb4o:rollup ssb-qb4olap:dateInMonth.
+
+_:ih13 a qb4o:HierarchyStep;
+  qb4o:inHierarchy ssb-qb4olap:calendarHier;
+  qb4o:childLevel ssb-qb4olap:week;
+  qb4o:parentLevel ssb-qb4olap:year;
+  qb4o:pcCardinality qb4o:ManyToOne;
+  qb4o:rollup ssb-qb4olap:weekInYear.
+
+_:ih14 a qb4o:HierarchyStep;
+  qb4o:inHierarchy ssb-qb4olap:calendarHier;
+  qb4o:childLevel ssb-qb4olap:month;
+  qb4o:parentLevel ssb-qb4olap:year;
+  qb4o:pcCardinality qb4o:ManyToOne;
+  qb4o:rollup ssb-qb4olap:monthInYear.
+
+#-----------------------------------------------------------------------------------------------------
+#Customer dimension
+ 
+ssb-qb4olap:customerDim a qb:DimensionProperty ;
+ rdfs:label "Customer dimension"@en ;
+ qb4o:hasHierarchy ssb-qb4olap:custgeoHier.
+
+#dimension hierarchies
+ssb-qb4olap:custgeoHier a qb4o:Hierarchy ;
+   rdfs:label "Customer Geographic Hierarchy"@en ;
+   qb4o:inDimension ssb-qb4olap:customerDim;
+   qb4o:hasLevel rdfh:lo_custkey, ssb-qb4olap:city, ssb-qb4olap:nation, ssb-qb4olap:region.
+
+#hierarchy levels and attributes
+
+#customer level
+rdfh:lo_custkey a qb4o:LevelProperty;
+   rdfs:label "Customer level"@en;
+   qb4o:hasAttribute rdfh:c_custkey, rdfh:c_name, rdfh:c_address.
+
+rdfh:c_custkey  a qb4o:LevelAttribute;
+    rdfs:label "Customer ID"@en ;
+    rdfs:range xsd:integer.
+rdfh:c_name  a qb4o:LevelAttribute;
+    rdfs:label "Customer Name"@en ;
+    rdfs:range xsd:string.
+rdfh:c_address  a qb4o:LevelAttribute;
+    rdfs:label "Customer Address"@en ;
+    rdfs:range xsd:string.
+
+#city level
+ssb-qb4olap:city a qb4o:LevelProperty;
+   rdfs:label "City level"@en;
+   qb4o:hasAttribute ssb-qb4olap:cityName.
+
+ssb-qb4olap:cityName  a qb4o:LevelAttribute;
+    rdfs:label "City Name"@en ;
+    rdfs:range xsd:string.
+
+#nation level
+ssb-qb4olap:nation a qb4o:LevelProperty;
+   rdfs:label "Nation level"@en;
+   qb4o:hasAttribute ssb-qb4olap:nationName.
+
+ssb-qb4olap:nationName  a qb4o:LevelAttribute;
+    rdfs:label "Nation Name"@en ;
+    rdfs:range xsd:string.
+
+#region level
+ssb-qb4olap:region a qb4o:LevelProperty;
+   rdfs:label "Region level"@en;
+   qb4o:hasAttribute ssb-qb4olap:regionName.
+
+ssb-qb4olap:regionName  a qb4o:LevelAttribute;
+    rdfs:label "Region Name"@en ;
+    rdfs:range xsd:string.
+
+#rollup relationships
+ssb-qb4olap:inCity a qb4o:RollupProperty.
+ssb-qb4olap:inNation a qb4o:RollupProperty.
+ssb-qb4olap:inRegion a qb4o:RollupProperty.
+
+
+#hierarchy steps
+_:ih21 a qb4o:HierarchyStep;
+  qb4o:inHierarchy ssb-qb4olap:custgeoHier;
+  qb4o:childLevel rdfh:lo_custkey;
+  qb4o:parentLevel ssb-qb4olap:city;
+  qb4o:pcCardinality qb4o:ManyToOne;
+  qb4o:rollup ssb-qb4olap:inCity.
+
+:ih22 a qb4o:HierarchyStep;
+  qb4o:inHierarchy ssb-qb4olap:custgeoHier,ssb-qb4olap:suppgeoHier;
+  qb4o:childLevel ssb-qb4olap:city;
+  qb4o:parentLevel ssb-qb4olap:nation;
+  qb4o:pcCardinality qb4o:ManyToOne;
+  qb4o:rollup ssb-qb4olap:inNation.
+
+_:ih22 a qb4o:HierarchyStep;
+  qb4o:inHierarchy ssb-qb4olap:custgeoHier,ssb-qb4olap:suppgeoHier;
+  qb4o:childLevel ssb-qb4olap:nation;
+  qb4o:parentLevel ssb-qb4olap:region;
+  qb4o:pcCardinality qb4o:ManyToOne;
+  qb4o:rollup ssb-qb4olap:inRegion. 
+
+#-----------------------------------------------------------------------------------------------------
+#Supplier dimension
+ 
+ssb-qb4olap:supplierDim a qb:DimensionProperty ;
+ rdfs:label "Supplier dimension"@en ;
+ qb4o:hasHierarchy ssb-qb4olap:suppgeoHier.
+
+#dimension hierarchies
+ssb-qb4olap:suppgeoHier a qb4o:Hierarchy ;
+   rdfs:label "Supplier Geographic Hierarchy"@en ;
+   qb4o:inDimension ssb-qb4olap:supplierDim;
+   qb4o:hasLevel rdfh:lo_suppkey, ssb-qb4olap:city, ssb-qb4olap:nation, ssb-qb4olap:region.
+
+#hierarchy levels and attributes
+
+#supplier level
+rdfh:lo_suppkey a qb4o:LevelProperty;
+   rdfs:label "Supplier level"@en;
+   qb4o:hasAttribute rdfh:s_suppkey, rdfh:s_name, rdfh:s_address.
+
+rdfh:s_suppkey  a qb4o:LevelAttribute;
+    rdfs:label "Supplier ID"@en ;
+    rdfs:range xsd:integer.
+rdfh:s_name  a qb4o:LevelAttribute;
+    rdfs:label "Supplier Name"@en ;
+    rdfs:range xsd:string.
+rdfh:s_address  a qb4o:LevelAttribute;
+    rdfs:label "Supplier Address"@en ;
+    rdfs:range xsd:string.
+
+#hierarchy steps
+_:ih31 a qb4o:HierarchyStep;
+  qb4o:inHierarchy ssb-qb4olap:suppgeoHier;
+  qb4o:childLevel rdfh:lo_suppkey;
+  qb4o:parentLevel ssb-qb4olap:city;
+  qb4o:pcCardinality qb4o:ManyToOne;
+  qb4o:rollup ssb-qb4olap:inCity.
+
+#-----------------------------------------------------------------------------------------------------
+#Parts dimension
+
+ssb-qb4olap:partsDim a qb:DimensionProperty ;
+ rdfs:label "Parts dimension"@en ;
+ qb4o:hasHierarchy ssb-qb4olap:partsHier.
+
+#dimension hierarchies
+ssb-qb4olap:partsHier a qb4o:Hierarchy ;
+   rdfs:label "Parts Hierarchy"@en ;
+   qb4o:inDimension ssb-qb4olap:partsDim;
+   qb4o:hasLevel rdfh:lo_partkey, ssb-qb4olap:brand, ssb-qb4olap:category, ssb-qb4olap:manufacturer.
+
+#hierarchy levels and attributes
+
+#parts level
+rdfh:lo_partkey a qb4o:LevelProperty;
+   rdfs:label "Parts level"@en;
+   qb4o:hasAttribute rdfh:p_partkey, rdfh:p_name, rdfh:p_color.
+
+rdfh:p_partkey a qb4o:LevelAttribute;
+    rdfs:label "Part ID"@en ;
+    rdfs:range xsd:integer.
+rdfh:p_name  a qb4o:LevelAttribute;
+    rdfs:label "Part Name"@en ;
+    rdfs:range xsd:string.
+rdfh:p_color  a qb4o:LevelAttribute;
+    rdfs:label "Part Color"@en ;
+    rdfs:range xsd:string.
+
+
+#brand level
+ssb-qb4olap:brand a qb4o:LevelProperty;
+   rdfs:label "Brand level"@en;
+   qb4o:hasAttribute ssb-qb4olap:brandName.
+
+ssb-qb4olap:brandName  a qb4o:LevelAttribute;
+    rdfs:label "Brand Name"@en ;
+    rdfs:range xsd:string.
+
+#category level
+ssb-qb4olap:category a qb4o:LevelProperty;
+   rdfs:label "Category level"@en;
+   qb4o:hasAttribute ssb-qb4olap:categoryName.
+
+ssb-qb4olap:categoryName  a qb4o:LevelAttribute;
+    rdfs:label "Category Name"@en ;
+    rdfs:range xsd:string.
+
+#manufacturer level
+ssb-qb4olap:manufacturer a qb4o:LevelProperty;
+   rdfs:label "Manufacturer level"@en;
+   qb4o:hasAttribute ssb-qb4olap:manufacturerName.
+
+ssb-qb4olap:manufacturerName  a qb4o:LevelAttribute;
+    rdfs:label "Manufacturer Name"@en ;
+    rdfs:range xsd:string.
+
+#rollup relationships
+ssb-qb4olap:hasBrand a qb4o:RollupProperty.
+ssb-qb4olap:hasCategory a qb4o:RollupProperty.
+ssb-qb4olap:hasManufacturer a qb4o:RollupProperty.
+
+#hierarchy steps
+_:ih41 a qb4o:HierarchyStep;
+  qb4o:inHierarchy ssb-qb4olap:partsHier;
+  qb4o:childLevel rdfh:lo_partkey;
+  qb4o:parentLevel ssb-qb4olap:brand;
+  qb4o:pcCardinality qb4o:ManyToOne;
+  qb4o:rollup ssb-qb4olap:hasBrand.
+
+_:ih42 a qb4o:HierarchyStep;
+  qb4o:inHierarchy ssb-qb4olap:partsHier;
+  qb4o:childLevel ssb-qb4olap:brand;
+  qb4o:parentLevel ssb-qb4olap:category;
+  qb4o:pcCardinality qb4o:ManyToOne;
+  qb4o:rollup ssb-qb4olap:hasCategory.
+
+_:ih43 a qb4o:HierarchyStep;
+  qb4o:inHierarchy ssb-qb4olap:partsHier;
+  qb4o:childLevel ssb-qb4olap:category;
+  qb4o:parentLevel ssb-qb4olap:manufacturer;
+  qb4o:pcCardinality qb4o:ManyToOne;
+  qb4o:rollup ssb-qb4olap:hasManufacturer.
+

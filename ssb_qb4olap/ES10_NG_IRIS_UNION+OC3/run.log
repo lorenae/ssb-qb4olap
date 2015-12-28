@@ -1,0 +1,46 @@
+
+Version:                Openlink BIBM Test Driver 0.7.7
+Start date:             Mon Dec 07 18:28:07 ART 2015
+Scale factor:           1.0
+Explore Endpoint:       http://csi-server01.fing.edu.uy:8890/sparql
+Update Endpoint:        http://csi-server01.fing.edu.uy:8890/sparql
+Use case:               /home2/lorenae/MEGA/PhD/evaluacion/ssb_qb4olap/ES10_NG_IRIS_UNION+OC3/./queries
+Query Streams of Throughput Test:2
+Seed:                   808080
+TPC-H Power:            214.7 qph*scale (geom)
+TPC-H Throughput:       148.0 qph*scale
+TPC-H Composite:        178.2
+Measurment Interval:    632.6 seconds
+
+Duration of stream execution:
+                Query Start         Query End       Duration     RF1 Start           RF2 End           RF2 Start          RF2 End  
+Stream 0:	07/12/2015 06:28:07	07/12/2015 06:33:41	00:05:33	
+Stream 1:	07/12/2015 06:33:41	07/12/2015 06:44:13	00:10:32	
+Stream 2:	07/12/2015 06:33:41	07/12/2015 06:43:45	00:10:04	
+
+TPC Timing intervals (in seconds):
+
+Query		Q1	Q2	Q3	Q4	Q5	Q6	Q7	Q8	
+Stream 0:	2.5	5.1	0.9	23.2	11.9	16.9	34.6	7.0	
+Stream 1:	75.7	3.8	0.8	26.7	24.1	23.1	67.3	35.9	
+Stream 2:	4.6	3.1	0.9	41.1	26.7	34.6	63.4	15.9	
+Minimum: 	4.6	3.1	0.8	26.7	24.1	23.1	63.4	15.9	
+Maximum: 	75.7	3.8	0.9	41.1	26.7	34.6	67.3	35.9	
+Average: 	40.1	3.5	0.8	33.9	25.4	28.8	65.4	25.9	
+
+Query		Q9	Q10	Q11	Q12	Q13	Q14	Q15	Q16	
+Stream 0:	5.0	2.1	133.3	69.9	21.1	    	    	    	
+Stream 1:	3.7	1.1	186.4	138.6	45.4	    	    	    	
+Stream 2:	1.9	1.8	227.2	153.8	29.1	    	    	    	
+Minimum: 	1.9	1.1	186.4	138.6	29.1	    	    	    	
+Maximum: 	3.7	1.8	227.2	153.8	45.4	    	    	    	
+Average: 	2.8	1.5	206.8	146.2	37.2	    	    	    	
+
+Query		Q17	Q18	Q19	Q20	Q21	Q22	RF1	RF2	
+Stream 0:	    	    	    	    	    	    	    	    	
+Stream 1:	    	    	    	    	    	    	    	    	
+Stream 2:	    	    	    	    	    	    	    	    	
+Minimum: 	    	    	    	    	    	    	    	    	
+Maximum: 	    	    	    	    	    	    	    	    	
+Average: 	    	    	    	    	    	    	    	    	
+

@@ -1,0 +1,16 @@
+{QueryType:Select,
+results: [
+{column:d_year,
+type:int	
+},
+{column:s_nation,
+type:str	
+},
+{column:p_category,
+type:str	
+},
+{column:sum_profit,
+type:int	
+}
+]
+}

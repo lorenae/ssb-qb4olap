@@ -1,0 +1,9 @@
+{QueryType:Select,
+
+results: [
+{column:sum_revenue,
+type:int	
+}
+]
+
+}

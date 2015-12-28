@@ -1,0 +1,16 @@
+{QueryType:Select,
+results: [
+{column:d_year,
+type:int	
+},
+{column:s_city,
+type:str	
+},
+{column:p_brand1,
+type:str	
+},
+{column:sum_profit,
+type:int	
+}
+]
+}

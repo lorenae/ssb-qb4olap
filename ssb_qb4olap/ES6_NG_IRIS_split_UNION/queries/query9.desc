@@ -1,0 +1,16 @@
+{QueryType:Select,
+results: [
+{column:c_city,
+type:str
+},
+{column:s_city,
+type:str	
+},
+{column:d_year,
+type:int	
+},
+{column:lo_revenue,
+type:int	
+}
+]
+}

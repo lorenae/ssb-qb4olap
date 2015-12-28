@@ -1,0 +1,249 @@
+{ 
+Subquery 20 
+{ 
+Fork 245 
+{  
+in   iterates $25 "in_iter"
+  over ( #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+from DB.DBA.RDF_QUAD by RDF_QUAD_POGS        5.4 rows   
+Key RDF_QUAD_POGS  ASC ($29 "s_37_58_t26.S")
+ inlined <col=554 P =  #memberOf > , <col=555 O =  #region > , <col=552 G = $25 "in_iter">
+ 
+from DB.DBA.RDF_QUAD by RDF_QUAD        0.4 rows   
+Key RDF_QUAD  ASC ($35 "s_37_58_t27.O", $34 "s_37_58_t27.S", $33 "s_37_58_t27.G")
+ inlined <col=554 P =  #regionName > , <col=553 S = $29 "s_37_58_t26.S">
+ 
+ 
+After test:
+      0: $38 "one_of_these" := Call one_of_these ($33 "s_37_58_t27.G",  #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+      5: if ( 0  2(<) $38 "one_of_these") then 8 else 22 unkn 22
+      8: $39 "__ro2sq" := Call __ro2sq ($35 "s_37_58_t27.O")
+      13: $40 "rdf_regex_impl" := Call rdf_regex_impl ($39 "__ro2sq", <c AMERICA>, <c i>)
+      18: if ( 0  1(=) $40 "rdf_regex_impl") then 22 else 21 unkn 22
+      21: BReturn 1
+      22: BReturn 0
+in   iterates $42 "in_iter"
+  over ( #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+from DB.DBA.RDF_QUAD by RDF_QUAD_POGS       0.42 rows   
+Key RDF_QUAD_POGS  ASC ($46 "s_37_58_t25.S")
+ inlined <col=554 P =  #inRegion > , <col=555 O = $29 "s_37_58_t26.S"> , <col=552 G = $42 "in_iter">
+ 
+in   iterates $50 "in_iter"
+  over ( #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+from DB.DBA.RDF_QUAD by RDF_QUAD       0.39 rows   
+Key RDF_QUAD  ASC ($54 "s_37_58_t24.S")
+ inlined <col=554 P =  #memberOf > , <col=553 S = $46 "s_37_58_t25.S"> , <col=555 O =  #nation > , <col=552 G = $50 "in_iter">
+ 
+in   iterates $58 "in_iter"
+  over ( #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+from DB.DBA.RDF_QUAD by RDF_QUAD_POGS       0.44 rows   
+Key RDF_QUAD_POGS  ASC ($62 "s_37_58_t23.S")
+ inlined <col=554 P =  #inNation > , <col=555 O = $54 "s_37_58_t24.S"> , <col=552 G = $58 "in_iter">
+ 
+in   iterates $66 "in_iter"
+  over ( #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+from DB.DBA.RDF_QUAD by RDF_QUAD       0.41 rows   
+Key RDF_QUAD  ASC ($70 "s_37_58_t22.S")
+ inlined <col=554 P =  #memberOf > , <col=553 S = $62 "s_37_58_t23.S"> , <col=555 O =  #city > , <col=552 G = $66 "in_iter">
+ 
+in   iterates $74 "in_iter"
+  over ( #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+from DB.DBA.RDF_QUAD by RDF_QUAD_POGS    5.4e+02 rows   
+Key RDF_QUAD_POGS  ASC ($78 "s_37_58_t21.S")
+ inlined <col=554 P =  #inCity > , <col=555 O = $70 "s_37_58_t22.S"> , <col=552 G = $74 "in_iter">
+ 
+in   iterates $82 "in_iter"
+  over ( #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+from DB.DBA.RDF_QUAD by RDF_QUAD       0.43 rows   
+Key RDF_QUAD  ASC ($86 "s_37_58_t20.S")
+ inlined <col=554 P =  #memberOf > , <col=553 S = $78 "s_37_58_t21.S"> , <col=555 O =  #lo_suppkey > , <col=552 G = $82 "in_iter">
+ 
+in   iterates $90 "in_iter"
+  over ( #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+from DB.DBA.RDF_QUAD by RDF_QUAD_POGS    3.5e+03 rows   
+Key RDF_QUAD_POGS  ASC ($94 "s_37_58_t19.S")
+ inlined <col=554 P =  #lo_suppkey > , <col=555 O = $86 "s_37_58_t20.S"> , <col=552 G = $90 "in_iter">
+ 
+in   iterates $98 "in_iter"
+  over ( #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+from DB.DBA.RDF_QUAD by RDF_QUAD       0.63 rows   
+Key RDF_QUAD  ASC ($102 "s_37_58_t1.S")
+ inlined <col=554 P =  #dataSet > , <col=553 S = $94 "s_37_58_t19.S"> , <col=555 O =  #ds > , <col=552 G = $98 "in_iter">
+ 
+in   iterates $106 "in_iter"
+  over ( #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+from DB.DBA.RDF_QUAD by RDF_QUAD       0.63 rows   
+Key RDF_QUAD  ASC ($110 "s_37_58_t0.S")
+ inlined <col=554 P =  #type > , <col=553 S = $102 "s_37_58_t1.S"> , <col=555 O =  #Observation > , <col=552 G = $106 "in_iter">
+ 
+from DB.DBA.RDF_QUAD by RDF_QUAD        1.7 rows   
+Key RDF_QUAD  ASC ($116 "s_37_58_t13.S", $115 "s_37_58_t13.O", $114 "s_37_58_t13.G")
+ inlined <col=554 P =  #lo_partkey > , <col=553 S = $110 "s_37_58_t0.S">
+ Local Test
+      0: $119 "one_of_these" := Call one_of_these ($114 "s_37_58_t13.G",  #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+      5: if ( 0  2(<) $119 "one_of_these") then 8 else 9 unkn 9
+      8: BReturn 1
+      9: BReturn 0
+ 
+from DB.DBA.RDF_QUAD by RDF_QUAD        1.7 rows   
+Key RDF_QUAD  ASC ($123 "s_37_58_t7.S", $122 "s_37_58_t7.O", $121 "s_37_58_t7.G")
+ inlined <col=554 P =  #lo_orderdate > , <col=553 S = $110 "s_37_58_t0.S">
+ Local Test
+      0: $126 "one_of_these" := Call one_of_these ($121 "s_37_58_t7.G",  #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+      5: if ( 0  2(<) $126 "one_of_these") then 8 else 9 unkn 9
+      8: BReturn 1
+      9: BReturn 0
+ 
+from DB.DBA.RDF_QUAD by RDF_QUAD        1.7 rows   
+Key RDF_QUAD  ASC ($129 "s_37_58_t6.S", $128 "s_37_58_t6.G")
+ inlined <col=554 P =  #lo_supplycost > , <col=553 S = $110 "s_37_58_t0.S">
+ Local Test
+      0: $132 "one_of_these" := Call one_of_these ($128 "s_37_58_t6.G",  #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+      5: if ( 0  2(<) $132 "one_of_these") then 8 else 9 unkn 9
+      8: BReturn 1
+      9: BReturn 0
+ 
+from DB.DBA.RDF_QUAD by RDF_QUAD        1.7 rows   
+Key RDF_QUAD  ASC ($136 "s_37_58_t5.S", $135 "s_37_58_t5.O", $134 "s_37_58_t5.G")
+ inlined <col=554 P =  #lo_revenue > , <col=553 S = $110 "s_37_58_t0.S">
+ Local Test
+      0: $139 "one_of_these" := Call one_of_these ($134 "s_37_58_t5.G",  #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+      5: if ( 0  2(<) $139 "one_of_these") then 8 else 9 unkn 9
+      8: BReturn 1
+      9: BReturn 0
+ 
+from DB.DBA.RDF_QUAD by RDF_QUAD        1.7 rows   
+Key RDF_QUAD  ASC ($142 "s_37_58_t4.S", $141 "s_37_58_t4.G")
+ inlined <col=554 P =  #lo_extendedprice > , <col=553 S = $110 "s_37_58_t0.S">
+ Local Test
+      0: $145 "one_of_these" := Call one_of_these ($141 "s_37_58_t4.G",  #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+      5: if ( 0  2(<) $145 "one_of_these") then 8 else 9 unkn 9
+      8: BReturn 1
+      9: BReturn 0
+ 
+from DB.DBA.RDF_QUAD by RDF_QUAD        1.7 rows   
+Key RDF_QUAD  ASC ($148 "s_37_58_t3.S", $147 "s_37_58_t3.G")
+ inlined <col=554 P =  #lo_discount > , <col=553 S = $110 "s_37_58_t0.S">
+ Local Test
+      0: $151 "one_of_these" := Call one_of_these ($147 "s_37_58_t3.G",  #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+      5: if ( 0  2(<) $151 "one_of_these") then 8 else 9 unkn 9
+      8: BReturn 1
+      9: BReturn 0
+ 
+from DB.DBA.RDF_QUAD by RDF_QUAD        1.7 rows   
+Key RDF_QUAD  ASC ($153 "s_37_58_t2.G")
+ inlined <col=554 P =  #lo_quantity > , <col=553 S = $110 "s_37_58_t0.S">
+ Local Test
+      0: $156 "one_of_these" := Call one_of_these ($153 "s_37_58_t2.G",  #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+      5: if ( 0  2(<) $156 "one_of_these") then 8 else 9 unkn 9
+      8: BReturn 1
+      9: BReturn 0
+ 
+in   iterates $158 "in_iter"
+  over ( #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+from DB.DBA.RDF_QUAD by RDF_QUAD        0.5 rows   
+Key RDF_QUAD  ASC ($162 "s_37_58_t14.S")
+ inlined <col=554 P =  #memberOf > , <col=553 S = $115 "s_37_58_t13.O"> , <col=555 O =  #lo_partkey > , <col=552 G = $158 "in_iter">
+ 
+from DB.DBA.RDF_QUAD by RDF_QUAD        1.4 rows   
+Key RDF_QUAD  ASC ($167 "s_37_58_t15.O", $166 "s_37_58_t15.G")
+ inlined <col=554 P =  #hasBrand > , <col=553 S = $115 "s_37_58_t13.O">
+ Local Test
+      0: $170 "one_of_these" := Call one_of_these ($166 "s_37_58_t15.G",  #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+      5: if ( 0  2(<) $170 "one_of_these") then 8 else 9 unkn 9
+      8: BReturn 1
+      9: BReturn 0
+ 
+in   iterates $172 "in_iter"
+  over ( #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+from DB.DBA.RDF_QUAD by RDF_QUAD       0.42 rows   
+Key RDF_QUAD  ASC ($176 "s_37_58_t16.S")
+ inlined <col=554 P =  #memberOf > , <col=553 S = $167 "s_37_58_t15.O"> , <col=555 O =  #brand > , <col=552 G = $172 "in_iter">
+ 
+in   iterates $180 "in_iter"
+  over ( #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+from DB.DBA.RDF_QUAD by RDF_QUAD       0.43 rows   
+Key RDF_QUAD  ASC ($184 "s_37_58_t8.S")
+ inlined <col=554 P =  #memberOf > , <col=553 S = $122 "s_37_58_t7.O"> , <col=555 O =  #lo_orderdate > , <col=552 G = $180 "in_iter">
+ 
+in   iterates $188 "in_iter"
+  over ( #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+from DB.DBA.RDF_QUAD by RDF_QUAD_POGS        7.4 rows   
+Key RDF_QUAD_POGS  ASC ($192 "s_37_58_t12.S")
+ inlined <col=554 P =  #memberOf > , <col=555 O =  #year > , <col=552 G = $188 "in_iter">
+ 
+in   iterates $196 "in_iter"
+  over ( #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+from DB.DBA.RDF_QUAD by RDF_QUAD_POGS       0.43 rows   
+Key RDF_QUAD_POGS  ASC ($201 "s_37_58_t11.S", $200 "s_37_58_t11.O")
+ inlined <col=554 P =  #monthInYear > , <col=555 O = $192 "s_37_58_t12.S"> , <col=552 G = $196 "in_iter">
+ 
+in   iterates $205 "in_iter"
+  over ( #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+from DB.DBA.RDF_QUAD by RDF_QUAD       0.43 rows   
+Key RDF_QUAD  ASC ($209 "s_37_58_t9.O")
+ inlined <col=554 P =  #dateInMonth > , <col=553 S = $122 "s_37_58_t7.O"> , <col=555 O = $201 "s_37_58_t11.S"> , <col=552 G = $205 "in_iter">
+ 
+in   iterates $213 "in_iter"
+  over ( #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+from DB.DBA.RDF_QUAD by RDF_QUAD        0.4 rows   
+Key RDF_QUAD  ASC ()
+ inlined <col=554 P =  #memberOf > , <col=553 S = $209 "s_37_58_t9.O"> , <col=555 O =  #month > , <col=552 G = $213 "in_iter">
+ 
+ 
+Precode:
+      0: $219 "__ro2sq" := Call __ro2sq ($167 "s_37_58_t15.O")
+      5: $220 "__ro2sq" := Call __ro2sq ($200 "s_37_58_t11.O")
+      10: $221 "__ro2sq" := Call __ro2sq ($135 "s_37_58_t5.O")
+      15: $222 "_cvt" := Call _cvt (<constant>, $221 "__ro2sq")
+      20: BReturn 0
+from DB.DBA.RDF_QUAD by RDF_QUAD        6.5 rows   
+Key RDF_QUAD  ASC ($225 "s_37_58_t17.O", $224 "s_37_58_t17.G")
+ inlined <col=554 P =  #hasCategory > , <col=553 S = $167 "s_37_58_t15.O">
+ Local Test
+      0: $228 "one_of_these" := Call one_of_these ($224 "s_37_58_t17.G",  #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+      5: if ( 0  2(<) $228 "one_of_these") then 8 else 9 unkn 9
+      8: BReturn 1
+      9: BReturn 0
+ 
+in   iterates $230 "in_iter"
+  over ( #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+from DB.DBA.RDF_QUAD by RDF_QUAD       0.39 rows   
+Key RDF_QUAD  ASC ($234 "s_37_58_t18.S")
+ inlined <col=554 P =  #memberOf > , <col=553 S = $225 "s_37_58_t17.O"> , <col=555 O =  #category > , <col=552 G = $230 "in_iter">
+ 
+from DB.DBA.RDF_QUAD by RDF_QUAD       0.41 rows   
+Key RDF_QUAD  ASC ($239 "s_37_58_t28.O", $238 "s_37_58_t28.G")
+ inlined <col=554 P =  #categoryName > , <col=553 S = $225 "s_37_58_t17.O">
+ 
+ 
+After test:
+      0: $242 "one_of_these" := Call one_of_these ($238 "s_37_58_t28.G",  #inco/cubes/instances/ssb_qb4olap ,  #inco/cubes/schemas/ssb_qb4olap )
+      5: if ( 0  2(<) $242 "one_of_these") then 8 else 22 unkn 22
+      8: $243 "__ro2sq" := Call __ro2sq ($239 "s_37_58_t28.O")
+      13: $244 "rdf_regex_impl" := Call rdf_regex_impl ($243 "__ro2sq", <c MFGR#12>, <c i>)
+      18: if ( 0  1(=) $244 "rdf_regex_impl") then 22 else 21 unkn 22
+      21: BReturn 1
+      22: BReturn 0
+Sort (HASH) ($200 "s_37_58_t11.O", $167 "s_37_58_t15.O") -> ($222 "_cvt", $219 "__ro2sq", $220 "__ro2sq") up to   7.4e+12 distinct
+ 
+}
+Key from temp ($200 "s_37_58_t11.O", $167 "s_37_58_t15.O", $247 "aggregate", $219 "__ro2sq", $220 "__ro2sq")
+ 
+ Local Code
+      0: $21 "plm2" :=  := artm $220 "__ro2sq"
+      4: $22 "plm3" :=  := artm $219 "__ro2sq"
+      8: $23 "ag1" :=  := artm $247 "aggregate"
+      12: BReturn 0
+ 
+Subquery Select($21 "plm2", $22 "plm3", $23 "ag1", <$241 "<DB.DBA.RDF_QUAD s_37_58_t28>" spec 5>, <$236 "<DB.DBA.RDF_QUAD s_37_58_t18>" spec 5>, <$227 "<DB.DBA.RDF_QUAD s_37_58_t17>" spec 5>, <$218 "<DB.DBA.RDF_QUAD s_37_58_t10>" spec 5>, <$211 "<DB.DBA.RDF_QUAD s_37_58_t9>" spec 5>, <$203 "<DB.DBA.RDF_QUAD s_37_58_t11>" spec 5>, <$194 "<DB.DBA.RDF_QUAD s_37_58_t12>" spec 5>, <$186 "<DB.DBA.RDF_QUAD s_37_58_t8>" spec 5>, <$178 "<DB.DBA.RDF_QUAD s_37_58_t16>" spec 5>, <$169 "<DB.DBA.RDF_QUAD s_37_58_t15>" spec 5>, <$164 "<DB.DBA.RDF_QUAD s_37_58_t14>" spec 5>, <$155 "<DB.DBA.RDF_QUAD s_37_58_t2>" spec 5>, <$150 "<DB.DBA.RDF_QUAD s_37_58_t3>" spec 5>, <$144 "<DB.DBA.RDF_QUAD s_37_58_t4>" spec 5>, <$138 "<DB.DBA.RDF_QUAD s_37_58_t5>" spec 5>, <$131 "<DB.DBA.RDF_QUAD s_37_58_t6>" spec 5>, <$125 "<DB.DBA.RDF_QUAD s_37_58_t7>" spec 5>, <$118 "<DB.DBA.RDF_QUAD s_37_58_t13>" spec 5>, <$112 "<DB.DBA.RDF_QUAD s_37_58_t0>" spec 5>, <$104 "<DB.DBA.RDF_QUAD s_37_58_t1>" spec 5>, <$96 "<DB.DBA.RDF_QUAD s_37_58_t19>" spec 5>, <$88 "<DB.DBA.RDF_QUAD s_37_58_t20>" spec 5>, <$80 "<DB.DBA.RDF_QUAD s_37_58_t21>" spec 5>, <$72 "<DB.DBA.RDF_QUAD s_37_58_t22>" spec 5>, <$64 "<DB.DBA.RDF_QUAD s_37_58_t23>" spec 5>, <$56 "<DB.DBA.RDF_QUAD s_37_58_t24>" spec 5>, <$48 "<DB.DBA.RDF_QUAD s_37_58_t25>" spec 5>, <$37 "<DB.DBA.RDF_QUAD s_37_58_t27>" spec 5>, <$31 "<DB.DBA.RDF_QUAD s_37_58_t26>" spec 5>)
+}
+ 
+ 
+After code:
+      0: $262 "plm2" := Call __ro2sq ($21 "plm2")
+      5: $263 "plm3" := Call __ro2sq ($22 "plm3")
+      10: $264 "ag1" := Call __ro2sq ($23 "ag1")
+      15: BReturn 0
+Select ($262 "plm2", $263 "plm3", $264 "ag1")
+}

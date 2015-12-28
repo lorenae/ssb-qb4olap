@@ -1,0 +1,21 @@
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>
+
+select
+  sum(?lo_extendedprice) * sum(?lo_discount) as ?sum_revenue
+from <http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb>
+
+where {
+    ?li a rdfh:lineorder ;
+       rdfh:lo_orderdate ?lo_orderdate ;
+       rdfh:lo_extendedprice ?lo_extendedprice ;
+       rdfh:lo_discount ?lo_discount ;
+       rdfh:lo_quantity ?lo_quantity .
+
+    ?lo_orderdate rdfh:d_yearmonthnum ?d_yearmonthnum .
+       
+    filter ( (?d_yearmonthnum = 199401) &&
+      (?lo_discount >= 4) &&
+      (?lo_discount <= 6) &&
+      (?lo_quantity >= 26) &&
+      (?lo_quantity <= 35) ) 
+}

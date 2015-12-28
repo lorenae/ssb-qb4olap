@@ -1,0 +1,22 @@
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>
+
+select
+  ?d_year ?c_nation sum(?lo_revenue - ?lo_supplycost) as ?sum_profit 
+from <http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb>
+
+where {
+    ?li a rdfh:lineorder ;
+       rdfh:lo_orderdate ?lo_orderdate ;
+       rdfh:lo_custkey ?lo_custkey ;
+       rdfh:lo_suppkey ?lo_suppkey ;
+     rdfh:lo_revenue ?lo_revenue ;
+     rdfh:lo_supplycost ?lo_supplycost .
+
+    ?lo_orderdate rdfh:d_year ?d_year .
+    ?lo_custkey rdfh:c_region "AMERICA" .
+    ?lo_suppkey rdfh:s_region "AMERICA" .
+    ?lo_custkey rdfh:c_nation ?c_nation .
+    ?lo_partkey rdfh:p_mfgr ?p_mfgr . 
+    
+    FILTER (?d_year = 1992 and (?p_mfgr = 'MFGR#1' or ?p_mfgr = 'MFGR#2')).
+} group by ?d_year ?c_nation order by ?d_year ?c_nation

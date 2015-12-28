@@ -1,0 +1,18 @@
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>
+
+select
+  sum(?rdfh_lo_revenue) as ?lo_revenue ?d_year ?p_brand1 
+from <http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb>
+
+where {
+    ?li a rdfh:lineorder ;
+       rdfh:lo_orderdate ?lo_orderdate ;
+       rdfh:lo_partkey ?lo_partkey ;
+       rdfh:lo_suppkey ?lo_suppkey ;
+     rdfh:lo_revenue ?rdfh_lo_revenue .
+
+    ?lo_orderdate rdfh:d_year ?d_year .
+    ?lo_partkey rdfh:p_brand1 ?p_brand1 .
+    ?lo_partkey rdfh:p_category "MFGR#12" .
+    ?lo_suppkey rdfh:s_region "AMERICA" . 
+} group by ?d_year ?p_brand1 order by ?d_year ?p_brand1

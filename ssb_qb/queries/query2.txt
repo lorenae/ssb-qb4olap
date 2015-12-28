@@ -1,0 +1,34 @@
+PREFIX dc: <http://purl.org/dc/elements/1.1/> 
+PREFIX sdmx-measure: <http://purl.org/linked-data/sdmx/2009/measure#> 
+PREFIX qb: <http://purl.org/linked-data/cube#> 
+PREFIX refgovukyear: <http://reference.data.gov.uk/id/year/> 
+PREFIX refgovukmonth: <http://reference.data.gov.uk/id/month/> 
+PREFIX dcterms: <http://purl.org/dc/terms/> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX skosclass: <http://ddialliance.org/ontologies/skosclass#> 
+PREFIX owl: <http://www.w3.org/2002/07/owl#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfh: <http://lod2.eu/schemas/rdfh#> 
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+PREFIX refgovukday: <http://reference.data.gov.uk/id/day/> 
+PREFIX rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#> 
+
+select  SUM(?rdfh_lo_extendedprice) * SUM(?rdfh_lo_discount) as ?sum_revenue
+
+from <http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb>  from <http://lod2.eu/schemas/rdfh#ssb1_ttl_dsd> from <http://lod2.eu/schemas/rdfh#ssb1_ttl_levels> 
+
+where {  
+
+?obs qb:dataSet rdfh-inst:ds. 
+ 
+?obs <http://lod2.eu/schemas/rdfh#lo_orderdate>  ?rdfh_lo_orderdate0. 
+?rdfh_lo_orderdate skos:narrower ?rdfh_lo_orderdate0. 
+<http://lod2.eu/schemas/rdfh#lo_orderdateYearMonthNumLevel> skos:member ?rdfh_lo_orderdate. 
+?obs <http://lod2.eu/schemas/rdfh#lo_extendedprice> ?rdfh_lo_extendedprice. 
+?obs <http://lod2.eu/schemas/rdfh#lo_discount> ?rdfh_lo_discount. 
+?obs <http://lod2.eu/schemas/rdfh#lo_quantity> ?rdfh_lo_quantity 
+FILTER(?rdfh_lo_quantity >= 26 AND ?rdfh_lo_quantity <= 35). 
+FILTER(?rdfh_lo_discount >= 4 AND ?rdfh_lo_discount <= 6). 
+FILTER(?rdfh_lo_orderdate = <http://lod2.eu/schemas/rdfh#lo_orderdateYearMonthNum199401> ).
+
+}  
