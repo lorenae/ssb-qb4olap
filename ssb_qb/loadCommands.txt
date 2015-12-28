@@ -1,0 +1,35 @@
+
+SSB_QB
+
+
+1) create graphs 
+
+INSTANCES 
+SPARQL create GRAPH  <http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb>
+
+SCHEMA 
+SPARQL create GRAPH <http://lod2.eu/schemas/rdfh#ssb1_ttl_dsd> 
+
+MORE SCHEMA 
+SPARQL create GRAPH <http://lod2.eu/schemas/rdfh#ssb1_ttl_levels> 
+
+2) load data into graphs
+
+delete from DB.DBA.load_list;
+
+ld_dir (<path to your data directory>, 'dsd.ttl', 'http://lod2.eu/schemas/rdfh#ssb1_ttl_dsd');
+ld_dir (<path to your data directory>, 'datelevels.ttl', 'http://lod2.eu/schemas/rdfh#ssb1_ttl_levels');
+ld_dir (<path to your data directory>, 'custlevels.ttl', 'http://lod2.eu/schemas/rdfh#ssb1_ttl_levels');
+ld_dir (<path to your data directory>, 'partlevels.ttl', 'http://lod2.eu/schemas/rdfh#ssb1_ttl_levels');
+ld_dir (<path to your data directory>, 'supplevels.ttl', 'http://lod2.eu/schemas/rdfh#ssb1_ttl_levels');
+ld_dir (<path to your data directory>, 'lineorder_qb.ttl', 'http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb');
+
+rdf_loader_run ();
+
+
+3) Check if everything was loaded
+
+select * from DB.DBA.load_list;
+
+
+

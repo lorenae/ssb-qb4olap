@@ -1,0 +1,23 @@
+SSB_LD
+
+1) create graph
+
+SPARQL create GRAPH <http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb>;
+
+
+2)load files into graph
+
+delete from DB.DBA.load_list;
+
+ld_dir (<path to your data directory>, 'supplier.ttl', 'http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb');
+ld_dir (<path to your data directory>, 'date.ttl', 'http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb');
+ld_dir (<path to your data directory>, 'customer.ttl', 'http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb');
+ld_dir (<path to your data directory>, 'part.ttl', 'http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb');
+ld_dir (<path to your data directory>, 'lineorder.ttl', 'http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb');
+
+rdf_loader_run ();
+
+
+3) Check if everything was loaded
+
+select * from DB.DBA.load_list;

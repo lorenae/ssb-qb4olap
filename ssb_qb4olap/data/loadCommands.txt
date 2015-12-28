@@ -1,0 +1,679 @@
+
+
+SSB_LD
+
+1) create graph
+
+SPARQL create GRAPH <http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb>;
+
+
+2)load files into graph
+
+delete from DB.DBA.load_list;
+
+ld_dir ('/home/lorenae/data/ssb/ssb_ld', 'supplier.ttl', 'http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb');
+ld_dir ('/home/lorenae/data/ssb/ssb_ld', 'date.ttl', 'http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb');
+ld_dir ('/home/lorenae/data/ssb/ssb_ld', 'customer.ttl', 'http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb');
+ld_dir ('/home/lorenae/data/ssb/ssb_ld', 'part.ttl', 'http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb');
+ld_dir ('/home/lorenae/data/ssb/ssb_ld', 'lineorder.ttl', 'http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb');
+
+select * from DB.DBA.load_list;
+
+rdf_loader_run ();
+
+select count(*)
+from <http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb>
+where {?s ?p ?o}
+
+SQL> select * from DB.DBA.load_list;
+ll_file                                                                           ll_graph                                                                          ll_state    ll_started           ll_done              ll_host     ll_work_time  ll_error
+VARCHAR NOT NULL                                                                  VARCHAR                                                                           INTEGER     TIMESTAMP            TIMESTAMP            INTEGER     INTEGER     VARCHAR
+_______________________________________________________________________________
+
+/home/lorenae/data/ssb/ssb_ld/customer.ttl                                        http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb                                      2           2015.9.2 20:9.7 0    2015.9.2 20:9.25 0   0           NULL        NULL
+/home/lorenae/data/ssb/ssb_ld/date.ttl                                            http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb                                      2           2015.9.2 20:9.23 0   2015.9.2 20:9.25 0   0           NULL        NULL
+/home/lorenae/data/ssb/ssb_ld/lineorder.ttl                                       http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb                                      2           2015.9.2 20:9.23 0   2015.9.2 21:22.30 0  0           NULL        NULL
+/home/lorenae/data/ssb/ssb_ld/part.ttl                                            http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb                                      2           2015.9.2 20:9.25 0   2015.9.2 20:11.16 0  0           NULL        NULL
+/home/lorenae/data/ssb/ssb_ld/supplier.ttl                                        http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb                                      2           2015.9.2 20:11.16 0  2015.9.2 20:11.17 0  0           NULL        NULL
+
+5 Rows. -- 1 msec.
+
+SSB_QB
+INSTANCES <http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb>
+SCHEMA <http://lod2.eu/schemas/rdfh#ssb1_ttl_dsd> 
+MORE SCHEMA <http://lod2.eu/schemas/rdfh#ssb1_ttl_levels> 
+
+ld_dir ('/home/lorenae/data/ssb/ssb_qb', 'dsd.ttl', 'http://lod2.eu/schemas/rdfh#ssb1_ttl_dsd');
+ld_dir ('/home/lorenae/data/ssb/ssb_qb', 'datelevels.ttl', 'http://lod2.eu/schemas/rdfh#ssb1_ttl_levels');
+ld_dir ('/home/lorenae/data/ssb/ssb_qb', 'custlevels.ttl', 'http://lod2.eu/schemas/rdfh#ssb1_ttl_levels');
+ld_dir ('/home/lorenae/data/ssb/ssb_qb', 'partlevels.ttl', 'http://lod2.eu/schemas/rdfh#ssb1_ttl_levels');
+ld_dir ('/home/lorenae/data/ssb/ssb_qb', 'supplevels.ttl', 'http://lod2.eu/schemas/rdfh#ssb1_ttl_levels');
+ld_dir ('/home/lorenae/data/ssb/ssb_qb', 'lineorder_qb.ttl', 'http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb');
+
+
+delete from DB.DBA.load_list;
+SQL> select * from DB.DBA.load_list;
+ll_file                                                                           ll_graph                                                                          ll_state    ll_started           ll_done              ll_host     ll_work_time  ll_error
+VARCHAR NOT NULL                                                                  VARCHAR                                                                           INTEGER     TIMESTAMP            TIMESTAMP            INTEGER     INTEGER     VARCHAR
+_______________________________________________________________________________
+
+/home/lorenae/data/ssb/ssb_qb/custlevels.ttl                                      http://lod2.eu/schemas/rdfh#ssb1_ttl_levels                                       2           2015.9.2 22:0.13 0   2015.9.2 22:0.15 0   0           NULL        NULL
+/home/lorenae/data/ssb/ssb_qb/datelevels.ttl                                      http://lod2.eu/schemas/rdfh#ssb1_ttl_levels                                       2           2015.9.2 22:0.15 0   2015.9.2 22:0.16 0   0           NULL        NULL
+/home/lorenae/data/ssb/ssb_qb/dsd.ttl                                             http://lod2.eu/schemas/rdfh#ssb1_ttl_dsd                                          2           2015.9.2 22:0.15 0   2015.9.2 22:0.16 0   0           NULL        NULL
+/home/lorenae/data/ssb/ssb_qb/partlevels.ttl                                      http://lod2.eu/schemas/rdfh#ssb1_ttl_levels                                       2           2015.9.2 22:0.15 0   2015.9.2 22:0.30 0   0           NULL        NULL
+/home/lorenae/data/ssb/ssb_qb/supplevels.ttl                                      http://lod2.eu/schemas/rdfh#ssb1_ttl_levels                                       2           2015.9.2 22:0.30 0   2015.9.2 22:0.30 0   0           NULL        NULL
+/home/lorenae/data/ssb/ssb_qb/lineorder_qb.ttl                                    http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb                                      2           2015.9.2 22:2.24 0   2015.9.2 22:28.43 0  0           NULL        NULL
+
+
+
+sparql select count(*)
+from <http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb>
+where {?s ?p ?o} ;
+
+116354257
+
+sparql select count(*)
+from <http://lod2.eu/schemas/rdfh#ssb1_ttl_levels>
+where {?s ?p ?o} ;
+
+478103
+
+sparql select count(*)
+from <http://lod2.eu/schemas/rdfh#ssb1_ttl_dsd>
+where {?s ?p ?o} ;
+
+184
+
+TOTAL: 116832544
+
+sparql 
+
+prefix rdfh: <http://lod2.eu/schemas/rdfh#> 
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>
+prefix qb: <http://purl.org/linked-data/cube#> 
+
+select count(?o)
+from <http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb>
+where {?o qb:dataSet rdfh-inst:ds.}
+ ;
+
+
+
+
+SSB_QB4OLAP
+
+
+INSTANCES <http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap>
+SCHEMA <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> 
+
+1) create graphs
+SPARQL create GRAPH <http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap>;
+SPARQL create GRAPH <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap>;
+
+1.1) delete graphs
+
+SPARQL DEFINE sql:log-enable 3 CLEAR GRAPH <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap>;
+
+
+
+delete from DB.DBA.load_list;
+SQL> select * from DB.DBA.load_list;
+
+2) load data
+ld_dir ('/home/lorenae/data/ssb/ssb_qb4olap', 'lineorder_qb1.ttl', 'http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap');
+ld_dir ('/home/lorenae/data/ssb/ssb_qb4olap', 'ssb_qb4olap_dsd.ttl', 'http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap');
+ld_dir ('/home/lorenae/data/ssb/ssb_ld', 'supplier.ttl', 'http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap');
+ld_dir ('/home/lorenae/data/ssb/ssb_ld', 'date.ttl', 'http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap');
+ld_dir ('/home/lorenae/data/ssb/ssb_ld', 'customer.ttl', 'http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap');
+ld_dir ('/home/lorenae/data/ssb/ssb_ld', 'part.ttl', 'http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap');
+
+
+
+rdf_loader_run ();
+
+sparql select count(*) from <http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap> where {?s ?p ?o} ;
+120023423
+
+
+sparql select count(*) from <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> where {?s ?p ?o} ;
+2332306
+
+sparql 
+PREFIX qb: <http://purl.org/linked-data/cube#> 
+PREFIX qb4o: <http://purl.org/qb4olap/cubes#> 
+
+SELECT  count(?o)
+FROM <http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap> 
+FROM <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> 
+WHERE { ?o a qb:Observation .
+?o qb:dataSet <http://lod2.eu/schemas/rdfh-inst#ds> 
+ }
+
+6001171
+
+--------------------------------------------------------------------------------------------------------------
+SPARQL queries to add calculated members to observations
+
+NO NEED TO DO THIS!!
+
+#materialization of calculated measures 
+INSERT INTO GRAPH <http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap>
+     {?o rdfh:sum_revenue ?sum_revenue;
+      rdfh:sum_profit ?sum_profit.}
+WHERE{
+SELECT  ?o ?extendedprice * ?discount as ?sum_revenue ?revenue - ?supplycost as ?sum_profit
+FROM <http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap>
+WHERE
+    {?o qb:dataSet rdfh-inst:ds;
+     rdfh:lo_extendedprice ?extendedprice;
+     rdfh:lo_discount ?discount;
+     rdfh:lo_revenue ?revenue;
+     rdfh:lo_supplycost ?supplycost.
+     }
+    }
+    
+
+--------------------------------------------------------------------------------------------------------------
+SPARQL queries to populate QB4OLAP dimensions from SSB_LD
+
+Must define URIs.
+Follow a pattern similar to the one proposed by Kampgen.
+
+
+-----------------------------------------------------------Time dimension
+
+-date level
+LEVEL: rdfh:lo_orderdate
+MEMBER URIs: ?date 
+ATTRIBUTES: 
+rdfh:d_daynuminweek
+rdfh:d_dayofweek
+rdfh:d_daynuminmonth
+rdfh:d_daynuminyear.
+ROLLUPS TO:
+- ssb-qb4olap:week via ssb-qb4olap:dateInWeek
+- ssb-qb4olap:month via ssb-qb4olap:dateInMonth
+
+-week level
+LEVEL: sb-qb4olap:week
+MEMBER URIs: 
+ATTRIBUTES: 
+ssb-qb4olap:weekNbYear (obtained from rdfh:d_weeknuminyear)
+ROLLUPS TO:
+- ssb-qb4olap:month via ssb-qb4olap:weekInMonth
+
+-month level
+LEVEL: sb-qb4olap:month
+MEMBER URIS: 
+ATTRIBUTES: 
+ssb-qb4olap:monthNbYear (obtained from rdfh:d_monthnuminyear)
+ssb-qb4olap:monthName (obtained from rdfh:d_month)
+ROLLUPS TO:
+- ssb-qb4olap:year via ssb-qb4olap:monthInYear
+
+-year level
+LEVEL: sb-qb4olap:year
+ATTRIBUTES: 
+ssb-qb4olap:yearNum (obtained from rdfh:d_year)
+
+/// sample from date.ttl
+rdfh-inst:date_19920101
+    a rdfh:date ;
+    rdfh:d_datekey 19920101 ;
+    rdfh:d_date "January 1, 1992" ;
+    rdfh:d_dayofweek "Thursday" ;
+    rdfh:d_month "January" ;
+    rdfh:d_year 1992 ;
+    rdfh:d_yearmonthnum 199201 ;
+    rdfh:d_yearmonth "Jan1992" ;
+    rdfh:d_daynuminweek 5 ;
+    rdfh:d_daynuminmonth 1 ;
+    rdfh:d_daynuminyear 1 ;
+    rdfh:d_monthnuminyear 1 ;
+    rdfh:d_weeknuminyear 1 ;
+    rdfh:d_sellingseason "Winter" ;
+    rdfh:d_lastdayinweekfl "0" ;
+    rdfh:d_lastdayinmonthfl "1" ;
+    rdfh:d_holidayfl "1" ;
+    rdfh:d_weekdayfl "1" .
+
+
+prefix rdfh: <http://lod2.eu/schemas/rdfh#> 
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>
+prefix qb: <http://purl.org/linked-data/cube#> 
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+prefix skos: <http://www.w3.org/2004/02/skos/core#> 
+prefix skosclass: <http://ddialliance.org/ontologies/skosclass#> 
+prefix qb4o: <http://purl.org/qb4olap/cubes#> 
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#> 
+
+INSERT INTO GRAPH <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> { 
+?date qb4o:memberOf rdfh:lo_orderdate;
+	ssb-qb4olap:dateInWeek ?week;
+	ssb-qb4olap:dateInMonth ?month.
+
+?week qb4o:memberOf ssb-qb4olap:week;
+	ssb-qb4olap:weekNbYear ?d_weeknuminyear;
+	ssb-qb4olap:weekInYear ?year.
+
+?month qb4o:memberOf ssb-qb4olap:month;
+	ssb-qb4olap:monthNbYear ?d_monthnuminyear;
+	ssb-qb4olap:monthName ?d_month;
+	ssb-qb4olap:yearmonthnum ?d_yearmonthnum;
+	ssb-qb4olap:monthInYear ?year.
+
+?year qb4o:memberOf ssb-qb4olap:year;
+	ssb-qb4olap:yearNum ?d_year.
+
+}
+WHERE{
+	SELECT iri (bif:concat ("http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap#week", bif:concat (str(?d_year), str(?d_weeknuminyear)))) as ?week
+	iri (bif:concat ("http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap#month", str(?d_yearmonthnum))) as ?month
+	iri (bif:concat ("http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap#year", str(?d_year))) as ?year 
+	?date ?d_weeknuminyear ?d_monthnuminyear ?d_month ?d_year ?d_yearmonthnum
+	FROM <http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb>
+	WHERE{
+	?date a rdfh:date.
+	  ?date rdfh:d_weeknuminyear ?d_weeknuminyear.
+      ?date rdfh:d_year ?d_year.
+      ?date rdfh:d_yearmonth ?d_yearmonth.
+      ?date rdfh:d_yearmonthnum ?d_yearmonthnum.
+      ?date rdfh:d_monthnuminyear ?d_monthnuminyear.
+      ?date rdfh:d_month ?d_month.
+	}
+}
+
+
+prefix qb4o: <http://purl.org/qb4olap/cubes#> 
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>
+prefix rdfh: <http://lod2.eu/schemas/rdfh#> 
+ 
+sparql select count(*) from <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> where {?s ?p ?o} ;
+2341500
+
+prefix qb4o: <http://purl.org/qb4olap/cubes#> 
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#> 
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>  
+
+select count(?date) 
+from <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> 
+where { ?date qb4o:memberOf rdfh:lo_orderdate.
+}
+select count(?date) 
+from <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> 
+where { ?date qb4o:memberOf ssb-qb4olap:week.
+}
+select count(?date) 
+from <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> 
+where { ?date qb4o:memberOf ssb-qb4olap:month.
+}
+
+select count(?date) 
+from <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> 
+where { ?date qb4o:memberOf ssb-qb4olap:year.
+}
+
+
+
+-----------------------------------------------------------Customer dimension
+#customer level
+LEVEL: rdfh:lo_custkey
+MEMBER URIs: ?customer 
+ATTRIBUTES: 
+rdfh:c_custkey
+rdfh:c_name
+rdfh:c_address
+
+ROLLUPS TO:
+- ssb-qb4olap:city via ssb-qb4olap:inCity
+
+#city level
+LEVEL: ssb-qb4olap:city
+MEMBER URIs:  
+ATTRIBUTES: 
+ssb-qb4olap:cityName
+
+ROLLUPS TO:
+- ssb-qb4olap:nation via ssb-qb4olap:inNation
+
+#nation level
+LEVEL: ssb-qb4olap:nation
+MEMBER URIs:  
+ATTRIBUTES: 
+ssb-qb4olap:nationName
+
+ROLLUPS TO:
+- ssb-qb4olap:region via ssb-qb4olap:inRegion
+
+#region level
+LEVEL: ssb-qb4olap:region
+MEMBER URIs:  
+ATTRIBUTES: 
+ssb-qb4olap:regionName
+
+
+	prefix rdfh: <http://lod2.eu/schemas/rdfh#> 
+	prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>
+	prefix qb: <http://purl.org/linked-data/cube#> 
+	prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+	prefix skos: <http://www.w3.org/2004/02/skos/core#> 
+	prefix skosclass: <http://ddialliance.org/ontologies/skosclass#> 
+	prefix qb4o: <http://purl.org/qb4olap/cubes#> 
+	prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#> 
+
+	INSERT INTO GRAPH <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> { 
+	?customer qb4o:memberOf rdfh:lo_custkey;
+		ssb-qb4olap:inCity ?city.
+
+	?city qb4o:memberOf ssb-qb4olap:city;
+		ssb-qb4olap:cityName ?c_city;
+		ssb-qb4olap:inNation ?nation.
+
+	?nation qb4o:memberOf ssb-qb4olap:nation;
+		ssb-qb4olap:nationName ?c_nation;
+		ssb-qb4olap:inRegion ?region.
+
+	?region qb4o:memberOf ssb-qb4olap:region;
+		ssb-qb4olap:regionName ?c_region.
+
+	}
+	WHERE{
+		SELECT iri (bif:concat ("http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap#city", str(?c_city))) as ?city
+		iri (bif:concat ("http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap#nation", str(?c_nation))) as ?nation
+		iri (bif:concat ("http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap#region", str(?c_region))) as ?region 
+		?customer ?c_city ?c_nation ?c_region
+		FROM <http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb>
+		WHERE{
+		?customer a rdfh:customer.
+		?customer rdfh:c_city ?c_city.
+		?customer rdfh:c_nation ?c_nation.
+		?customer rdfh:c_region ?c_region.
+		}
+	}
+
+sample data from customer.ttl
+rdfh-inst:customer_1
+    a rdfh:customer ;
+    rdfh:c_custkey 1 ;
+    rdfh:c_name "Customer#000000001" ;
+    rdfh:c_address "j5JsirBM9P" ;
+    rdfh:c_city "MOROCCO  4" ;
+    rdfh:c_nation "MOROCCO" ;
+    rdfh:c_region "AFRICA" ;
+    rdfh:c_phone "25-214-662-5265" ;
+    rdfh:c_mktsegment "BUILDING" .
+
+
+sparql select count(*) from <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> where {?s ?p ?o} ;
+2402335
+
+    
+prefix qb4o: <http://purl.org/qb4olap/cubes#> 
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#> 
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#>  
+
+select count(?m) 
+from <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> 
+where { ?m qb4o:memberOf rdfh:lo_custkey.
+}
+select count(?m) 
+from <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> 
+where { ?m qb4o:memberOf ssb-qb4olap:city.
+}
+select count(?m) 
+from <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> 
+where { ?m qb4o:memberOf ssb-qb4olap:nation.
+}
+
+select count(?m) 
+from <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> 
+where { ?m qb4o:memberOf ssb-qb4olap:region.
+}
+
+-----------------------------------------------------------Supplier dimension
+
+#supplier level
+LEVEL: rdfh:lo_suppkey
+MEMBER URIs: ?supplier
+ATTRIBUTES: 
+rdfh:s_suppkey
+rdfh:s_name
+rdfh:s_address
+
+ROLLUPS TO:
+- ssb-qb4olap:city via ssb-qb4olap:inCity
+
+#city level
+LEVEL: ssb-qb4olap:city
+MEMBER URIs:  
+ATTRIBUTES: 
+ssb-qb4olap:cityName
+
+ROLLUPS TO:
+- ssb-qb4olap:nation via ssb-qb4olap:inNation
+
+#nation level
+LEVEL: ssb-qb4olap:nation
+MEMBER URIs:  
+ATTRIBUTES: 
+ssb-qb4olap:nationName
+
+ROLLUPS TO:
+- ssb-qb4olap:region via ssb-qb4olap:inRegion
+
+#region level
+LEVEL: ssb-qb4olap:region
+MEMBER URIs:  
+ATTRIBUTES: 
+ssb-qb4olap:regionName
+
+
+	prefix rdfh: <http://lod2.eu/schemas/rdfh#> 
+	prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>
+	prefix qb: <http://purl.org/linked-data/cube#> 
+	prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+	prefix skos: <http://www.w3.org/2004/02/skos/core#> 
+	prefix skosclass: <http://ddialliance.org/ontologies/skosclass#> 
+	prefix qb4o: <http://purl.org/qb4olap/cubes#> 
+	prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#> 
+
+	INSERT INTO GRAPH <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> {
+	?supplier qb4o:memberOf rdfh:lo_suppkey;
+		ssb-qb4olap:inCity ?city.
+
+	?city qb4o:memberOf ssb-qb4olap:city;
+		ssb-qb4olap:cityName ?s_city;
+		ssb-qb4olap:inNation ?nation.
+
+	?nation qb4o:memberOf ssb-qb4olap:nation;
+		ssb-qb4olap:nationName ?s_nation;
+		ssb-qb4olap:inRegion ?region.
+
+	?region qb4o:memberOf ssb-qb4olap:region;
+		ssb-qb4olap:regionName ?s_region.
+
+	}
+	WHERE{
+		SELECT iri (bif:concat ("http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap#city", str(?s_city))) as ?city
+		iri (bif:concat ("http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap#nation", str(?s_nation))) as ?nation
+		iri (bif:concat ("http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap#region", str(?s_region))) as ?region 
+		?supplier ?s_city ?s_nation ?s_region
+		FROM <http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb>
+		WHERE{
+		?supplier a rdfh:supplier.
+		?supplier rdfh:s_city ?s_city.
+		?supplier rdfh:s_nation ?s_nation.
+		?supplier rdfh:s_region ?s_region.
+		}
+	}
+
+
+prefix qb4o: <http://purl.org/qb4olap/cubes#> 
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#> 
+prefix rdfh: <http://lod2.eu/schemas/rdfh#> 
+    
+select count(?d)
+from <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap>
+where {?d qb4o:memberOf rdfh:lo_suppkey }
+
+
+sample data from supplier.ttl
+
+rdfh-inst:supplier_1
+    a rdfh:supplier ;
+    rdfh:s_suppkey 1 ;
+    rdfh:s_name "Supplier#000000001" ;
+    rdfh:s_address "sdrGnXCDRcfriBvY0KL,i" ;
+    rdfh:s_city "PERU     7" ;
+    rdfh:s_nation "PERU" ;
+    rdfh:s_region "AMERICA" ;
+    rdfh:s_phone "27-989-741-2988" .
+
+-----------------------------------------------------------Parts dimension
+
+#part level
+LEVEL: rdfh:lo_partkey
+MEMBER URIs: ?part
+ATTRIBUTES: 
+rdfh:p_partkey
+rdfh:p_name
+rdfh:p_color.
+
+ROLLUPS TO:
+- ssb-qb4olap:brand via ssb-qb4olap:hasBrand
+
+#brand level
+LEVEL: ssb-qb4olap:brand
+MEMBER URIs:  
+ATTRIBUTES: 
+ssb-qb4olap:brandName
+
+ROLLUPS TO:
+- ssb-qb4olap:category via ssb-qb4olap:hasCategory
+
+#category level
+LEVEL: ssb-qb4olap:category
+MEMBER URIs:  
+ATTRIBUTES: 
+ssb-qb4olap:categoryName
+
+ROLLUPS TO:
+- ssb-qb4olap:manufacturer via ssb-qb4olap:hasManufacturer
+
+#manufacturer level
+LEVEL: ssb-qb4olap:manufacturer
+MEMBER URIs:  
+ATTRIBUTES: 
+ssb-qb4olap:manufacturerName
+
+prefix rdfh: <http://lod2.eu/schemas/rdfh#> 
+prefix rdfh-inst: <http://lod2.eu/schemas/rdfh-inst#>
+prefix qb: <http://purl.org/linked-data/cube#> 
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+prefix skos: <http://www.w3.org/2004/02/skos/core#> 
+prefix skosclass: <http://ddialliance.org/ontologies/skosclass#> 
+prefix qb4o: <http://purl.org/qb4olap/cubes#> 
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#> 
+
+INSERT INTO GRAPH <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> {
+?part qb4o:memberOf rdfh:lo_partkey;
+	ssb-qb4olap:hasBrand ?brand.
+
+?brand qb4o:memberOf ssb-qb4olap:brand;
+	ssb-qb4olap:brandName ?p_brand1;
+	ssb-qb4olap:hasCategory ?category.
+
+?category qb4o:memberOf ssb-qb4olap:category;
+	ssb-qb4olap:categoryName ?p_category;
+	ssb-qb4olap:hasManufacturer ?manuf.
+
+?manuf qb4o:memberOf ssb-qb4olap:manufacturer;
+	ssb-qb4olap:manufacturerName ?p_mfgr.
+
+}
+WHERE{
+	SELECT iri (bif:concat ("http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap#brand", str(?p_category))) as ?category
+	iri (bif:concat ("http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap#category", str(?p_brand1))) as ?brand
+	iri (bif:concat ("http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap#manufacturer", str(?p_mfgr))) as ?manuf 
+	?part ?p_category ?p_brand1 ?p_mfgr
+	FROM <http://lod2.eu/schemas/rdfh-inst#ssb1_ttl_qb>
+	WHERE{
+	?part a rdfh:part.
+	?part rdfh:p_category ?p_category.
+	?part rdfh:p_brand1 ?p_brand1.
+	?part rdfh:p_mfgr ?p_mfgr.
+	}
+}
+
+prefix qb4o: <http://purl.org/qb4olap/cubes#> 
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#> 
+prefix rdfh: <http://lod2.eu/schemas/rdfh#> 
+    
+select count(?d)
+from <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap>
+where {?d qb4o:memberOf rdfh:lo_partkey }
+
+
+prefix qb4o: <http://purl.org/qb4olap/cubes#> 
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#> 
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>
+
+
+select count(?m) 
+from <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> 
+where { ?m qb4o:memberOf rdfh:lo_partkey.
+}
+select count(?m) 
+from <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> 
+where { ?m qb4o:memberOf ssb-qb4olap:brand.
+}
+select count(?m) 
+from <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> 
+where { ?m qb4o:memberOf ssb-qb4olap:category.
+}
+
+select count(?m) 
+from <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> 
+where { ?m qb4o:memberOf ssb-qb4olap:manufacturer.
+}
+
+sample data from part.ttl
+
+rdfh-inst:part_1
+    a rdfh:part ;
+    rdfh:p_partkey 1 ;
+    rdfh:p_name "lace spring" ;
+    rdfh:p_mfgr "MFGR#1" ;
+    rdfh:p_category "MFGR#11" ;
+    rdfh:p_brand1 "MFGR#1121" ;
+    rdfh:p_color "goldenrod" ;
+    rdfh:p_type "PROMO BURNISHED COPPER" ;
+    rdfh:p_size 7 ;
+    rdfh:p_container "JUMBO PKG" .
+
+
+
+EVERYTHING IS LOADED!!
+sparql select count(*) from <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> where {?s ?p ?o} ;
+2809420
+
+
+
+distribution by level 
+
+prefix qb4o: <http://purl.org/qb4olap/cubes#> 
+PREFIX qb: <http://purl.org/linked-data/cube#> 
+prefix ssb-qb4olap: <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap#> 
+prefix rdfh: <http://lod2.eu/schemas/rdfh#>
+
+select ?lm, count(?o)
+FROM <http://www.fing.edu.uy/inco/cubes/instances/ssb_qb4olap> 
+FROM <http://www.fing.edu.uy/inco/cubes/schemas/ssb_qb4olap> 
+ WHERE 
+{ ?o a qb:Observation .
+?o qb:dataSet <http://lod2.eu/schemas/rdfh-inst#ds> .
+?o rdfh:lo_orderdate ?lm
+}
+group by ?lm
