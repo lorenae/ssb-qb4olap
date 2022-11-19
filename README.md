@@ -1,7 +1,7 @@
 # SSB-QB4OLAP
 A benchmark for QB4OLAP queries
 
-SSB-QB4OLAP is inspired on the work by Kampgen et al, [No Size Fits All – Running the Star Schema Benchmark with SPARQL and RDF Aggregate Views](http://people.aifb.kit.edu/bka/ssb-benchmark/). In this work they compare different approaches to implement OLAP queries based on the [Star Schema Benchmark (SSB)](http://www.cs.umb.edu/~poneil/StarSchemaB.PDF). In particular they adapt SSB to evaluate [OLAP queries over cubes represented using W3C standard RDF Data cube vocabulary (QB)](http://people.aifb.kit.edu/bka/ssb-benchmark/#olap4ld-qb). 
+SSB-QB4OLAP is inspired on the work by Kampgen et al, [No Size Fits All – Running the Star Schema Benchmark with SPARQL and RDF Aggregate Views](https://www.aifb.kit.edu/images/8/8e/Kaempgen_harth_ssb-benchmark_ESWC-2013_own_version.pdf). In this work they compare different approaches to implement OLAP queries based on the [Star Schema Benchmark (SSB)](http://www.cs.umb.edu/~poneil/StarSchemaB.PDF). In particular they adapt SSB to evaluate [OLAP queries over cubes represented using W3C standard RDF Data cube vocabulary (QB)](https://github.com/bkaempgen/olap4ld). 
 
 QB4OLAP is a RDF-S vocabulary to represent multidimensional data cubes. It is accompanied with QL,a high-level OLAP language composed by operators like rollup, drilldown, slice, and dice. QB4OLAP includes enough metadata to allow the automatic translation of QL queries into SPARQL queries. The implementation of our query engine is available [here](https://github.com/lorenae/qb4olap-tools)
 
